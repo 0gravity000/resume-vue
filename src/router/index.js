@@ -1,9 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import TopView from '../views/TopView.vue'
 
 const routes = [
   {
     path: '/',
+    name: 'top',
+    component: TopView
+  },
+  {
+    path: '/home',
     name: 'home',
     component: HomeView
   },
