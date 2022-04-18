@@ -1,6 +1,6 @@
 <template>
   <NavbarMain />
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
@@ -10,7 +10,7 @@ import NavbarMain from '@/components/NavbarMain.vue'
 export default {
   components: {
     NavbarMain
-  }
+  },
 }
 
 </script>
