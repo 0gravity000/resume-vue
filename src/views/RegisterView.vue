@@ -8,7 +8,7 @@
         <div  class="row">
           <div class="col-12 mb-3">
             <label class="form-label">メールアドレス</label>
-            <input id="ｰinput-email1" v-model="email" class="form-control" type="email">
+            <input id="ｰinput-email1" v-model="email" class="form-control" type="email" placeholder="your@example.com">
           </div>
           <div class="col-12 mb-3">
             <label class="form-label">パスワード</label>
@@ -27,11 +27,10 @@ const axios = require('axios').default
 
 export default {
   name: 'RegisterView',
-  inject: ['theBaseURL'],
   data () {
     return {
-      email: "test@example.com",
-      password: "4444",
+      email: "",
+      password: "",
       accountList: [],
     }
   },

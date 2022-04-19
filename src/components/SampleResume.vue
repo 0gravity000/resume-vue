@@ -1,4 +1,16 @@
 <template>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="column is-6 goto-top">
+              <a href="" @click="goToTop">戻る</a>
+            </div>
+        </div>  <!-- col -->
+        <div class="col">
+            <div class="column is-6"></div>
+        </div>  <!-- col -->
+    </div>  <!-- row -->
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col">
@@ -320,3 +332,23 @@
     </div>
 
 </template>
+
+<script>
+
+export default {
+  methods: {
+    goToTop() {
+        this.$router.push('/')
+    }
+  }
+}
+
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.goto-top {
+  text-align: start;
+}
+
+</style>
