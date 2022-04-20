@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="register">
-      <h2 class="my-3">アカウント登録</h2>
+      <h2 class="my-3">ログイン</h2>
       <div class="my-3">
         <router-link to="/">戻る</router-link>
       </div>
@@ -15,7 +15,7 @@
             <label class="form-label">パスワード</label>
             <input id="input-password1" v-model="password" class="form-control" type="password">
           </div>
-          <button type="button" @click="postAccount" class="col-2 btn btn-primary m-2">登録</button>
+          <button type="button" @click="authLogin" class="col-2 btn btn-primary m-2">ログイン</button>
         </div>  <!-- row end -->
       </form>
     </div>
@@ -27,39 +27,29 @@
 const axios = require('axios').default
 
 export default {
-  name: 'RegisterView',
+  name: 'LoginView',
   data () {
     return {
       email: "",
       password: "",
-      accountList: [],
     }
   },
   mounted () {
-    this.updataAccountList()
+    this.showLoginView()
   },
   methods: {
-    updataAccountList: async function () {
-      axios
-        .get("/api/accounts")
-        .then((res) => {
-          console.log(res);
-          this.accountList = res.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log(this.accountList)
+    showLoginView: function () {
+      console.log("called showLoginView()")
     },
-    postAccount: async function () {
-      axios.post('/api/accounts', {
+    authLogin: async function () {
+      axios.post('/api/login', {
         email: this.email,
         password: this.password
       })
       .then(function (res) {
         console.log(res);
         const str = window.location.href
-        const str2= str.replace('/register', '');
+        const str2= str.replace('/login', '/home');
         //console.log(str2);
         //window.location.href = 'http://127.0.0.1:5000/'
         //self.push({ name: "top" }) NG
