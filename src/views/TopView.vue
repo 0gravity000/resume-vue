@@ -28,7 +28,7 @@
           <div>
             <router-link to="/sample">
               <!--<button class="content_boxlink mt-3" type="button" onclick="location.href='/guest'">サンプルを見てみる</button>-->
-              <button class="content_boxlink" type="button">サインイン</button>
+              <button class="content_boxlink" type="button">ログイン</button>
             </router-link>
           </div>
         </div>
