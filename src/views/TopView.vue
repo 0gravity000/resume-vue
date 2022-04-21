@@ -40,9 +40,26 @@
 </template>
 
 <script>
-// @ is an alias to /src
+//const axios = require('axios').default
 
 export default {
   name: 'TopView',
+  data () {
+    return {
+      is_reloaded: false 
+    }
+  },
+  mounted () {
+  },
+  beforeUnmount() {
+  },
+  methods: {
+    /*
+    reload: function(){
+      this.$router.go({path: this.$router.currentRoute.path, force: true})
+    },
+    */
+  },
 }
+
 </script>
