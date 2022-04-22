@@ -23,6 +23,9 @@
           </li>
         </ul>
       </div>
+      <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight">{{this.account.auth_user}}</div>
+      </div>
     </div>
   </nav>
 </template>

@@ -55,6 +55,7 @@ export default {
         console.log(res);
         self.$router.push({name: "home"})
         self.$emit('update-auth-notification', true) //★
+        self.$emit('update-user-notification', res.data) //★
       })
       .catch(function (err) {
         console.log(err);

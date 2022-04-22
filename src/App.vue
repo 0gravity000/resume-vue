@@ -2,10 +2,12 @@
   <NavbarMain 
     :account="AccountModel"
     @update-auth-notification="updateAuthState"
+    @update-user-notification="updateUserInfo"
   />
   <router-view 
     :account="AccountModel"
     @update-auth-notification="updateAuthState"
+    @update-user-notification="updateUserInfo"
   />
 </template>
 
@@ -20,7 +22,7 @@ export default {
   data () {
     return {
       AccountModel: {
-        auth_user: "",
+        auth_user: "guest",
         is_authenticated: "",
       }
     }
@@ -28,6 +30,10 @@ export default {
   methods: {
     updateAuthState(data) {
       this.AccountModel.is_authenticated = data
+    },
+    updateUserInfo(data) {
+      console.log(data)
+      this.AccountModel.auth_user = data
     }
   },
 }

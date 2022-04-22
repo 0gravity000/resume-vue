@@ -44,6 +44,7 @@ export default {
         console.log(res);
         self.$router.push({name: "logout"})
         self.$emit('update-auth-notification', false) //★
+        self.$emit('update-user-notification', res.data) //★
       })
       .catch(function (err) {
         console.log(err);
