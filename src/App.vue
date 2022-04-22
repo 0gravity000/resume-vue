@@ -22,13 +22,14 @@ export default {
   data () {
     return {
       AccountModel: {
-        auth_user: "guest",
         is_authenticated: "",
+        auth_user: "",
       }
     }
   },
   methods: {
     updateAuthState(data) {
+      console.log(data)
       this.AccountModel.is_authenticated = data
     },
     updateUserInfo(data) {

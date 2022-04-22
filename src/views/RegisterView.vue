@@ -34,13 +34,16 @@ export default {
   },
   data () {
     return {
-      email: "",
-      password: "",
+      AccountModel: {
+        is_authenticated: "",
+        auth_user: "",
+      },
       accountList: [],
     }
   },
   mounted () {
-    this.updataAccountList()
+    this.authCheck()
+    //this.updataAccountList()
   },
   methods: {
     updataAccountList: async function () {
@@ -54,6 +57,24 @@ export default {
           console.log(err);
         });
       console.log(this.accountList)
+    },
+    authCheck: function () {
+      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
+      axios.get('/api/authcheck', {
+      })
+      .then(function (res) {
+        console.log(res.data)
+        self.AccountModel.is_authenticated = res.data.is_authenticated
+        self.AccountModel.auth_user = res.data.auth_user
+      })
+      .then(function () {
+        console.log("then 2nd")
+        self.$emit('update-auth-notification', self.AccountModel.is_authenticated) //★
+        self.$emit('update-user-notification', self.AccountModel.auth_user) //★
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
     },
     postAccount: async function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
