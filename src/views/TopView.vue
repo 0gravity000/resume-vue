@@ -44,12 +44,22 @@
 
 export default {
   name: 'TopView',
+  props: {
+    account: {
+      type : Object,
+    }
+  },
   data () {
     return {
-      is_reloaded: false 
+      AccountModel: {
+        auth_user: "",
+        is_authenticated: "",
+      }
     }
   },
   mounted () {
+    this.AccountModel.auth_user = this.account.auth_user
+    this.AccountModel.is_authenticated = this.account.is_authenticated
   },
   beforeUnmount() {
   },

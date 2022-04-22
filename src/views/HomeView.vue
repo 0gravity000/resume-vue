@@ -16,6 +16,11 @@ export default {
   components: {
     HelloWorld
   },
+  props: {
+    account: {
+      type : Object,
+    }
+  },
   data () {
     return {
       email: "",
@@ -37,14 +42,8 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        //const str = window.location.href
-        //const str2= str.replace('/home', '');
-        //console.log(str2);
-        //window.location.href = 'http://127.0.0.1:5000/'
-        //self.push({ name: "top" }) NG
-        //window.location.href = str2
         self.$router.push({name: "logout"})
-        //self.$router.push({name: "top"})
+        self.$emit('update-auth-notification', false) //★
       })
       .catch(function (err) {
         console.log(err);

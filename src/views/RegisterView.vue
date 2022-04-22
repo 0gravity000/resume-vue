@@ -23,11 +23,15 @@
 </template>
 
 <script>
-//let self = this.$router;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
 const axios = require('axios').default
 
 export default {
   name: 'RegisterView',
+  props: {
+    account: {
+      type : Object,
+    }
+  },
   data () {
     return {
       email: "",
@@ -41,7 +45,7 @@ export default {
   methods: {
     updataAccountList: async function () {
       axios
-        .get("/api/accounts")
+        .get("/api/register")
         .then((res) => {
           console.log(res);
           this.accountList = res.data;
@@ -52,18 +56,15 @@ export default {
       console.log(this.accountList)
     },
     postAccount: async function () {
-      axios.post('/api/accounts', {
+      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
+      axios.post('/api/register', {
         email: this.email,
         password: this.password
       })
       .then(function (res) {
         console.log(res);
-        const str = window.location.href
-        const str2= str.replace('/register', '');
-        //console.log(str2);
-        //window.location.href = 'http://127.0.0.1:5000/'
-        //self.push({ name: "top" }) NG
-        window.location.href = str2
+        self.$router.push({name: "home"})
+        self.$emit('update-auth-notification', true) //★
       })
       .catch(function (err) {
         console.log(err);

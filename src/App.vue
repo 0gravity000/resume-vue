@@ -1,6 +1,12 @@
 <template>
-  <NavbarMain :is_authenticated="is_authenticated"/>
-  <router-view />
+  <NavbarMain 
+    :account="AccountModel"
+    @update-auth-notification="updateAuthState"
+  />
+  <router-view 
+    :account="AccountModel"
+    @update-auth-notification="updateAuthState"
+  />
 </template>
 
 <script>
@@ -9,12 +15,19 @@ import NavbarMain from '@/components/NavbarMain.vue'
 
 export default {
   components: {
-    NavbarMain
+    NavbarMain,
   },
   data () {
     return {
-      auth_user: "",
-      is_authenticated: false
+      AccountModel: {
+        auth_user: "",
+        is_authenticated: "",
+      }
+    }
+  },
+  methods: {
+    updateAuthState(data) {
+      this.AccountModel.is_authenticated = data
     }
   },
 }

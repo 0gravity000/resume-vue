@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col">
             <div class="column is-6 goto-top">
-              <a href="" @click="goToTop">戻る</a>
+                <router-link to="/">戻る</router-link>
             </div>
         </div>  <!-- col -->
         <div class="col">
@@ -337,9 +337,11 @@
 
 export default {
   methods: {
+    /*
     goToTop() {
         this.$router.push('/')
     }
+    */
   }
 }
 

@@ -9,7 +9,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <div v-if="is_authenticated == true">
+          <div v-if="account.is_authenticated == true">
             <li class="nav-item">
               <router-link to="/home">
                 <a class="nav-link active" aria-current="page">Home</a>
@@ -31,8 +31,8 @@
 export default {
   name: 'NavbarMain',
   props: {
-    is_authenticated: {
-      type : Boolean,
+    account: {
+      type : Object,
     }
   }
 }
