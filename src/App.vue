@@ -1,5 +1,5 @@
 <template>
-  <NavbarMain />
+  <NavbarMain :is_authenticated="is_authenticated"/>
   <router-view />
 </template>
 
@@ -10,6 +10,12 @@ import NavbarMain from '@/components/NavbarMain.vue'
 export default {
   components: {
     NavbarMain
+  },
+  data () {
+    return {
+      auth_user: "",
+      is_authenticated: false
+    }
   },
 }
 

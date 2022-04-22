@@ -9,11 +9,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/home">
-              <a class="nav-link active" aria-current="page">Home</a>
-            </router-link>
-          </li>
+          <div v-if="is_authenticated == true">
+            <li class="nav-item">
+              <router-link to="/home">
+                <a class="nav-link active" aria-current="page">Home</a>
+              </router-link>
+            </li>
+          </div>
           <li class="nav-item">
             <router-link to="/about">
               <a class="nav-link">About</a>
@@ -28,7 +30,13 @@
 <script>
 export default {
   name: 'NavbarMain',
+  props: {
+    is_authenticated: {
+      type : Boolean,
+    }
+  }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
