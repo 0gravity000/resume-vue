@@ -93,9 +93,11 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        self.$router.push({name: "home"})
-        self.$emit('update-auth-notification', true) //★
-        self.$emit('update-user-notification', res.data) //★
+        self.$emit('update-auth-notification', res.data.is_authenticated) //★
+        self.$emit('update-user-notification', res.data.auth_user) //★
+        if (res.data.result == "OK") {
+          self.$router.push({name: "home"})
+        }
       })
       .catch(function (err) {
         console.log(err);
