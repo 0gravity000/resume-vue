@@ -29,6 +29,8 @@ export default {
       }
     }
   },
+  created (){
+  },
   mounted () {
     this.showHomeView()
     this.authCheck()
@@ -37,8 +39,13 @@ export default {
     showHomeView: function () {
       console.log("called showHomeView()")
     },
-    authCheck: function () {
+    resolveAfterxSecond() {
+      //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
+      return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
+    },
+    authCheck: async function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
+      await this.resolveAfterxSecond()
       axios.get('/api/authcheck', {
       })
       .then(function (res) {
