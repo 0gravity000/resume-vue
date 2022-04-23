@@ -7,7 +7,7 @@
 <script>
 // @ is an alias to /src
 import SampleResume from '@/components/SampleResume.vue'
-const axios = require('axios').default
+//const axios = require('axios').default
 
 export default {
   name: 'SampleView',
@@ -28,9 +28,12 @@ export default {
     }
   },
   mounted () {
-    this.authCheck()
+    this.AccountModel.is_authenticated = this.account.is_authenticated
+    this.AccountModel.auth_user = this.account.auth_user
+    //this.authCheck()
   },
   methods: {
+    /*
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -54,6 +57,7 @@ export default {
         console.log(err);
       });
     },
+    */
   },
 }
 </script>

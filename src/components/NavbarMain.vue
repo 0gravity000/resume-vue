@@ -37,7 +37,20 @@ export default {
     account: {
       type : Object,
     }
-  }
+  },
+  data () {
+    return {
+      AccountModel: {
+        is_authenticated: "",
+        auth_user: "",
+      },
+    }
+  },
+  mounted () {
+    //this.authCheck()
+    this.AccountModel.is_authenticated = this.account.is_authenticated
+    this.AccountModel.auth_user = this.account.auth_user
+  },
 }
 
 </script>

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const axios = require('axios').default
+//const axios = require('axios').default
 
 export default {
   name: 'AboutView',
@@ -23,9 +23,12 @@ export default {
     }
   },
   mounted () {
-    this.authCheck()
+    //this.authCheck()
+    this.AccountModel.is_authenticated = this.account.is_authenticated
+    this.AccountModel.auth_user = this.account.auth_user
   },
   methods: {
+    /*
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -49,6 +52,7 @@ export default {
         console.log(err);
       });
     },
+    */
   }
 }
 </script>

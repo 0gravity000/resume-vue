@@ -33,12 +33,15 @@ export default {
   },
   mounted () {
     this.showHomeView()
-    this.authCheck()
+    this.AccountModel.is_authenticated = this.account.is_authenticated
+    this.AccountModel.auth_user = this.account.auth_user
+    //this.authCheck()
   },
   methods: {
     showHomeView: function () {
       console.log("called showHomeView()")
     },
+    /*
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -62,6 +65,7 @@ export default {
         console.log(err);
       });
     },
+    */
     authLogout: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.get('/api/logout', {

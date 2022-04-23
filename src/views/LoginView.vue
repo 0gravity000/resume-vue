@@ -41,10 +41,13 @@ export default {
     }
   },
   mounted () {
-    this.showLoginView()
-    this.authCheck()
+    this.AccountModel.is_authenticated = this.account.is_authenticated
+    this.AccountModel.auth_user = this.account.auth_user
+    //this.showLoginView()
+    //this.authCheck()
   },
   methods: {
+    /*
     showLoginView: function () {
       console.log("called showLoginView()")
     },
@@ -71,6 +74,7 @@ export default {
         console.log(err);
       });
     },
+    */
     authLogin: async function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.post('/api/login', {
@@ -79,9 +83,9 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        self.$router.push({name: "home"})
         self.$emit('update-auth-notification', true) //★
         self.$emit('update-user-notification', res.data) //★
+        self.$router.push({name: "home"})
       })
       .catch(function (err) {
         console.log(err);
