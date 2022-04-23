@@ -9,7 +9,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <div v-if="account.is_authenticated == true">
+          <div v-if="isauthenticated">
             <li class="nav-item">
               <router-link to="/home">
                 <a class="nav-link active" aria-current="page">Home</a>
@@ -24,7 +24,7 @@
         </ul>
       </div>
       <div class="d-flex flex-row-reverse bd-highlight">
-        <div class="p-2 bd-highlight">{{this.account.auth_user}}</div>
+        <div class="p-2 bd-highlight">{{authuser}}</div>
       </div>
     </div>
   </nav>
@@ -46,11 +46,33 @@ export default {
       },
     }
   },
+  updateed () {
+    this.syncIsauthenticated()
+    this.syncAuthuser()
+  },
   mounted () {
     //this.authCheck()
-    this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_user = this.account.auth_user
+    this.syncIsauthenticated()
+    this.syncAuthuser()
   },
+  methods: {
+    syncIsauthenticated (){
+      this.AccountModel.is_authenticated = this.account.is_authenticated
+    },
+    syncAuthuser(){
+      this.AccountModel.auth_user = this.account.auth_user
+    },
+  },
+  computed: {
+    isauthenticated: function(){
+      this.syncIsauthenticated()
+      return this.account.is_authenticated
+    },
+    authuser: function(){
+      this.syncAuthuser()
+      return this.account.auth_user
+    },
+  }
 }
 
 </script>

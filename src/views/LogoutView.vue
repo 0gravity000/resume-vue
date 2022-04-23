@@ -22,6 +22,8 @@ export default {
       },
     }
   },
+  created() {
+  },
   mounted () {
     this.AccountModel.is_authenticated = this.account.is_authenticated
     this.AccountModel.auth_user = this.account.auth_user

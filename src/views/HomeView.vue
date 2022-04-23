@@ -1,20 +1,22 @@
 <template>
   <div class="home">
-    <button type="button" @click="authLogout">ログアウト</button>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NavbarUser 
+      :account="AccountModel"
+      @update-auth-notification="updateAuthState"
+      @update-user-notification="updateUserInfo"
+    />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import NavbarUser from '@/components/NavbarUser.vue'
 const axios = require('axios').default
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    NavbarUser,
   },
   props: {
     account: {
@@ -38,6 +40,16 @@ export default {
     this.AccountModel.auth_user = this.account.auth_user
   },
   methods: {
+    updateAuthState(data) {
+      console.log(data)
+      this.AccountModel.is_authenticated = data
+      this.$emit('update-auth-notification', this.AccountModel.is_authenticated) //★
+    },
+    updateUserInfo(data) {
+      console.log(data)
+      this.AccountModel.auth_user = data
+      this.$emit('update-user-notification', this.AccountModel.auth_user) //★
+    },
     showHomeView: function () {
       console.log("called showHomeView()")
     },
@@ -62,22 +74,6 @@ export default {
         console.log("then 2nd")
         self.$emit('update-auth-notification', self.AccountModel.is_authenticated) //★
         self.$emit('update-user-notification', self.AccountModel.auth_user) //★
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-    },
-    authLogout: function () {
-      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
-      axios.get('/api/logout', {
-        //email: this.email,
-        //password: this.password
-      })
-      .then(function (res) {
-        console.log(res);
-        self.$emit('update-auth-notification', false) //★
-        self.$emit('update-user-notification', res.data) //★
-        self.$router.push({name: "logout"})
       })
       .catch(function (err) {
         console.log(err);
