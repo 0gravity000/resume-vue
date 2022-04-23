@@ -30,18 +30,17 @@ export default {
     }
   },
   created (){
+    this.authCheck()
   },
   mounted () {
     this.showHomeView()
     this.AccountModel.is_authenticated = this.account.is_authenticated
     this.AccountModel.auth_user = this.account.auth_user
-    //this.authCheck()
   },
   methods: {
     showHomeView: function () {
       console.log("called showHomeView()")
     },
-    /*
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -55,6 +54,9 @@ export default {
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
         self.AccountModel.auth_user = res.data.auth_user
+        if(res.data.is_authenticated == false) {  //認証がない場合TOP画面へリダイレクト
+          self.$router.push({name: "top"})
+        }
       })
       .then(function () {
         console.log("then 2nd")
@@ -65,7 +67,6 @@ export default {
         console.log(err);
       });
     },
-    */
     authLogout: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.get('/api/logout', {
@@ -74,9 +75,9 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        self.$router.push({name: "logout"})
         self.$emit('update-auth-notification', false) //★
         self.$emit('update-user-notification', res.data) //★
+        self.$router.push({name: "logout"})
       })
       .catch(function (err) {
         console.log(err);
