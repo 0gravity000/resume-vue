@@ -42,7 +42,7 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_user: "",
+        auth_account: "",
       },
     }
   },
@@ -60,7 +60,7 @@ export default {
       this.AccountModel.is_authenticated = this.account.is_authenticated
     },
     syncAuthuser(){
-      this.AccountModel.auth_user = this.account.auth_user
+      this.AccountModel.auth_account = this.account.auth_account
     },
   },
   computed: {
@@ -70,7 +70,7 @@ export default {
     },
     authuser: function(){
       this.syncAuthuser()
-      return this.account.auth_user
+      return this.account.auth_account
     },
   }
 }

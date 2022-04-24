@@ -3,8 +3,8 @@ export default {
   name: 'AccountModel',
   data () {
     return {
-      auth_user: "",
-      is_authenticated: ""
+      is_authenticated: "",
+      auth_account: "",
     }
   },
 }

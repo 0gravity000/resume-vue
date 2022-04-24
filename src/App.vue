@@ -24,7 +24,7 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_user: "",
+        auth_account: "",
       }
     }
   },
@@ -38,7 +38,7 @@ export default {
     },
     updateUserInfo(data) {
       console.log(data)
-      this.AccountModel.auth_user = data
+      this.AccountModel.auth_account = data
     },
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
@@ -52,7 +52,7 @@ export default {
       .then(function (res) {
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_user = res.data.auth_user
+        self.AccountModel.auth_account = res.data.auth_account
       })
       .catch(function (err) {
         console.log(err);

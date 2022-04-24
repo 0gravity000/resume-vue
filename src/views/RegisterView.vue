@@ -36,14 +36,14 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_user: "",
+        auth_account: "",
       },
       accountList: [],
     }
   },
   mounted () {
     this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_user = this.account.auth_user
+    this.AccountModel.auth_account = this.account.auth_account
     //this.authCheck()
     //this.updataAccountList()
   },
@@ -73,12 +73,12 @@ export default {
       .then(function (res) {
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_user = res.data.auth_user
+        self.AccountModel.auth_account = res.data.auth_account
       })
       .then(function () {
         console.log("then 2nd")
         self.$emit('update-auth-notification', self.AccountModel.is_authenticated) //★
-        self.$emit('update-user-notification', self.AccountModel.auth_user) //★
+        self.$emit('update-user-notification', self.AccountModel.auth_account) //★
       })
       .catch(function (err) {
         console.log(err);
@@ -94,7 +94,7 @@ export default {
       .then(function (res) {
         console.log(res);
         self.$emit('update-auth-notification', res.data.is_authenticated) //★
-        self.$emit('update-user-notification', res.data.auth_user) //★
+        self.$emit('update-user-notification', res.data.auth_account) //★
         if (res.data.result == "OK") {
           self.$router.push({name: "home"})
         }

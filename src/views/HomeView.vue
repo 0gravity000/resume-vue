@@ -27,7 +27,7 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_user: "",
+        auth_account: "",
       }
     }
   },
@@ -37,7 +37,7 @@ export default {
   mounted () {
     this.showHomeView()
     this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_user = this.account.auth_user
+    this.AccountModel.auth_account = this.account.auth_account
   },
   methods: {
     updateAuthState(data) {
@@ -47,8 +47,8 @@ export default {
     },
     updateUserInfo(data) {
       console.log(data)
-      this.AccountModel.auth_user = data
-      this.$emit('update-user-notification', this.AccountModel.auth_user) //★
+      this.AccountModel.auth_account = data
+      this.$emit('update-user-notification', this.AccountModel.auth_account) //★
     },
     showHomeView: function () {
       console.log("called showHomeView()")
@@ -65,7 +65,7 @@ export default {
       .then(function (res) {
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_user = res.data.auth_user
+        self.AccountModel.auth_account = res.data.auth_account
         if(res.data.is_authenticated == false) {  //認証がない場合TOP画面へリダイレクト
           self.$router.push({name: "top"})
         }
@@ -73,7 +73,7 @@ export default {
       .then(function () {
         console.log("then 2nd")
         self.$emit('update-auth-notification', self.AccountModel.is_authenticated) //★
-        self.$emit('update-user-notification', self.AccountModel.auth_user) //★
+        self.$emit('update-user-notification', self.AccountModel.auth_account) //★
       })
       .catch(function (err) {
         console.log(err);
