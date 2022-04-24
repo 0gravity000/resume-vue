@@ -1,13 +1,11 @@
 <template>
   <NavbarMain 
     :account="AccountModel"
-    @update-auth-notification="updateAuthState"
-    @update-user-notification="updateUserInfo"
+    @update-auth-notification="updateAuthInfo"
   />
   <router-view 
     :account="AccountModel"
-    @update-auth-notification="updateAuthState"
-    @update-user-notification="updateUserInfo"
+    @update-auth-notification="updateAuthInfo"
   />
 </template>
 
@@ -24,7 +22,8 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       }
     }
   },
@@ -32,13 +31,11 @@ export default {
     this.authCheck()
   },
   methods: {
-    updateAuthState(data) {
+    updateAuthInfo(data) {
       console.log(data)
-      this.AccountModel.is_authenticated = data
-    },
-    updateUserInfo(data) {
-      console.log(data)
-      this.AccountModel.auth_account = data
+      this.AccountModel.is_authenticated = data.is_authenticated
+      this.AccountModel.auth_account_id = data.auth_account_id
+      this.AccountModel.auth_account_email = data.auth_account_email
     },
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
@@ -52,7 +49,8 @@ export default {
       .then(function (res) {
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_account = res.data.auth_account
+        self.AccountModel.auth_account_id = res.data.auth_account_id
+        self.AccountModel.auth_account_email = res.data.auth_account_email
       })
       .catch(function (err) {
         console.log(err);

@@ -36,14 +36,14 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       },
       accountList: [],
     }
   },
   mounted () {
-    this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_account = this.account.auth_account
+    this.AccountModel = this.account
     //this.authCheck()
     //this.updataAccountList()
   },
@@ -93,8 +93,8 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        self.$emit('update-auth-notification', res.data.is_authenticated) //★
-        self.$emit('update-user-notification', res.data.auth_account) //★
+        self.$emit('update-auth-notification', res.data) //★
+        //ユーザー認証に成功したらホーム画面に遷移
         if (res.data.result == "OK") {
           self.$router.push({name: "home"})
         }

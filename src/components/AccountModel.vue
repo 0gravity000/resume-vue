@@ -4,7 +4,8 @@ export default {
   data () {
     return {
       is_authenticated: "",
-      auth_account: "",
+      auth_account_id: "",
+      auth_account_email: ""
     }
   },
 }

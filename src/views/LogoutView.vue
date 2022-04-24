@@ -18,15 +18,15 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       },
     }
   },
   created() {
   },
   mounted () {
-    this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_account = this.account.auth_account
+    this.AccountModel = this.account
     //this.authCheck()
   },
   methods: {

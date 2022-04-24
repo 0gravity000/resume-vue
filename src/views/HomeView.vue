@@ -2,9 +2,9 @@
   <div class="home">
     <NavbarUser 
       :account="AccountModel"
-      @update-auth-notification="updateAuthState"
-      @update-user-notification="updateUserInfo"
+      @update-auth-notification="updateAuthInfo"
     />
+    <router-view />
   </div>
 </template>
 
@@ -27,7 +27,8 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       }
     }
   },
@@ -36,19 +37,17 @@ export default {
   },
   mounted () {
     this.showHomeView()
-    this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_account = this.account.auth_account
+    this.AccountModel = this.account
+    //this.AccountModel.is_authenticated = this.account.is_authenticated
+    //this.AccountModel.auth_account_id = this.account.auth_account_id
   },
   methods: {
-    updateAuthState(data) {
+    updateAuthInfo(data) {
       console.log(data)
-      this.AccountModel.is_authenticated = data
-      this.$emit('update-auth-notification', this.AccountModel.is_authenticated) //★
-    },
-    updateUserInfo(data) {
-      console.log(data)
-      this.AccountModel.auth_account = data
-      this.$emit('update-user-notification', this.AccountModel.auth_account) //★
+      this.AccountModel.is_authenticated = data.is_authenticated
+      this.AccountModel.auth_account_id = data.auth_account_id
+      this.AccountModel.auth_account_email = data.auth_account_email
+      this.$emit('update-auth-notification', this.AccountModel) //★
     },
     showHomeView: function () {
       console.log("called showHomeView()")
@@ -65,15 +64,17 @@ export default {
       .then(function (res) {
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_account = res.data.auth_account
+        self.AccountModel.auth_account_id = res.data.auth_account_id
+        self.AccountModel.auth_account_email = res.data.auth_account_email
         if(res.data.is_authenticated == false) {  //認証がない場合TOP画面へリダイレクト
           self.$router.push({name: "top"})
         }
       })
       .then(function () {
         console.log("then 2nd")
-        self.$emit('update-auth-notification', self.AccountModel.is_authenticated) //★
-        self.$emit('update-user-notification', self.AccountModel.auth_account) //★
+        self.$emit('update-auth-notification', self.AccountModel) //★
+        //self.$emit('update-auth-notification', self.AccountModel.is_authenticated) //★
+        //self.$emit('update-user-notification', self.AccountModel.auth_account) //★
       })
       .catch(function (err) {
         console.log(err);

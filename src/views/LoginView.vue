@@ -36,13 +36,13 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       },
     }
   },
   mounted () {
-    this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_account = this.account.auth_account
+    this.AccountModel = this.account
     //this.showLoginView()
     //this.authCheck()
   },
@@ -83,8 +83,7 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        self.$emit('update-auth-notification', true) //★
-        self.$emit('update-user-notification', res.data) //★
+        self.$emit('update-auth-notification', res.data) //★
         self.$router.push({name: "home"})
       })
       .catch(function (err) {

@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link to="/home">
+            <router-link to="/user">
               <a class="nav-link">基本情報</a>
             </router-link>
           </li>
@@ -47,14 +47,14 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       },
     }
   },
   mounted () {
     //this.authCheck()
-    this.AccountModel.is_authenticated = this.account.is_authenticated
-    this.AccountModel.auth_account = this.account.auth_account
+    this.AccountModel = this.account
   },
   methods: {
     authLogout: function () {
@@ -65,8 +65,7 @@ export default {
       })
       .then(function (res) {
         console.log(res);
-        self.$emit('update-auth-notification', false) //★
-        self.$emit('update-user-notification', res.data) //★
+        self.$emit('update-auth-notification', res.data) //★
         self.$router.push({name: "logout"})
       })
       .catch(function (err) {

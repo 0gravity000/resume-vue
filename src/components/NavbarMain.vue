@@ -24,7 +24,7 @@
         </ul>
       </div>
       <div class="d-flex flex-row-reverse bd-highlight">
-        <div class="p-2 bd-highlight">{{authuser}}</div>
+        <div class="p-2 bd-highlight">{{authuseremail}}</div>
       </div>
     </div>
   </nav>
@@ -42,35 +42,31 @@ export default {
     return {
       AccountModel: {
         is_authenticated: "",
-        auth_account: "",
+        auth_account_id: "",
+        auth_account_email: ""
       },
     }
   },
   updateed () {
-    this.syncIsauthenticated()
-    this.syncAuthuser()
+    this.syncAuthInfo()
   },
   mounted () {
     //this.authCheck()
-    this.syncIsauthenticated()
-    this.syncAuthuser()
+    this.syncAuthInfo()
   },
   methods: {
-    syncIsauthenticated (){
-      this.AccountModel.is_authenticated = this.account.is_authenticated
-    },
-    syncAuthuser(){
-      this.AccountModel.auth_account = this.account.auth_account
+    syncAuthInfo(){
+      this.AccountModel = this.account
     },
   },
   computed: {
     isauthenticated: function(){
-      this.syncIsauthenticated()
+      this.syncAuthInfo()
       return this.account.is_authenticated
     },
-    authuser: function(){
-      this.syncAuthuser()
-      return this.account.auth_account
+    authuseremail: function(){
+      this.syncAuthInfo()
+      return this.account.auth_account_email
     },
   }
 }
