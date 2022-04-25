@@ -26,6 +26,20 @@
           <span class="input-group-text">名かな</span>
           <input type="text" v-model="UserModel.firstname_kana" class="form-control" placeholder="名かな">
         </div>
+        <div class="input-group mb-3"><!--性別-->
+          <div class="form-check">
+            <input class="form-check-input" type="radio" v-model="translateGender" value="男性" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              男性
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" v-model="translateGender" value="女性" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              女性
+            </label>
+          </div>
+        </div>
         <div class="input-group mb-3">
           <span class="input-group-text">生年月日（年）</span>
           <input type="text" v-model="UserModel.birth_year" class="form-control" placeholder="生年月日（年）">
@@ -70,17 +84,23 @@
           <span class="input-group-text">通勤時間</span>
           <input type="text" v-model="UserModel.commuting_time" class="form-control" placeholder="">
         </div>
-        <div class="form-check form-switch">
-          <input class="form-check-input" v-model="UserModel.dependents" type="checkbox" role="switch">
-          <label class="form-check-label">扶養家族（配偶者を除く）</label>
+        <div class="input-group mb-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" v-model="UserModel.dependents" type="checkbox" role="switch">
+            <label class="form-check-label">扶養家族（配偶者を除く）</label>
+          </div>
         </div>
-        <div class="form-check form-switch">
-          <input class="form-check-input" v-model="UserModel.spouse" type="checkbox" role="switch">
-          <label class="form-check-label">配偶者</label>
+        <div class="input-group mb-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" v-model="UserModel.spouse" type="checkbox" role="switch">
+            <label class="form-check-label">配偶者</label>
+          </div>
         </div>
-        <div class="form-check form-switch">
-          <input class="form-check-input" v-model="UserModel.dependents_of_spouse" type="checkbox" role="switch">
-          <label class="form-check-label">配偶者の扶養家族</label>
+        <div class="input-group mb-3">
+          <div class="form-check form-switch">
+            <input class="form-check-input" v-model="UserModel.dependents_of_spouse" type="checkbox" role="switch">
+            <label class="form-check-label">配偶者の扶養家族</label>
+          </div>
         </div>
         <button type="submit" @click="setUserInfo" class="btn btn-primary">登録</button>
       </form>
@@ -110,6 +130,7 @@ export default {
         auth_account_email: ""
       },
       UserModel: "",
+      selectedGender: "男性"
     }
   },
   created (){
@@ -120,12 +141,32 @@ export default {
     this.AccountModel = this.account
     this.getUserInfo()
   },
+  computed: {
+    computedUserModel: function(){
+      return this.UserModel
+    },
+    translateGender: function(){
+      return this.checkGenderRadio()
+    }
+  },
   methods: {
     updateAuthInfo(data) {
       console.log(data)
       this.AccountModel = data
       this.$emit('update-auth-notification', this.AccountModel) //★
     },
+    checkGenderRadio() {
+      let gender = ""
+      if (this.selectedGender == "男性") {
+        this.UserModel.gender = 1
+        gender = "男性"
+      } else if (this.selectedGender == "女性") {
+        this.UserModel.gender = 2
+        gender = "女性"
+      }
+      return gender
+    },
+
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -171,6 +212,7 @@ export default {
         firstname: this.UserModel.firstname,
         lastname_kana: this.UserModel.lastname_kana,
         firstname_kana: this.UserModel.firstname_kana,
+        gender: this.UserModel.gender,
         birth_year: this.UserModel.birth_year,
         birth_month: this.UserModel.birth_month,
         birth_day: this.UserModel.birth_day,

@@ -26,6 +26,10 @@
         <li class="list-group-item col-4">{{UserModel.firstname_kana}}</li>
       </ul>
       <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary col-2">性別</li>
+        <li class="list-group-item col-4">{{translateGender}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">生年月日（年）</li>
         <li class="list-group-item col-4">{{UserModel.birth_year}}</li>
       </ul>
@@ -146,7 +150,16 @@ export default {
   computed: {
     computedUserModel: function(){
       return this.UserModel
-    }
+    },
+    translateGender: function(){
+      let gender = ""
+      if (this.UserModel.gender == 1) {
+        gender = "男性"
+      } else if (this.UserModel.gender == 2) {
+        gender = "女性"
+      }
+      return gender
+    },
   },
   methods: {
     updateAuthInfo(data) {
