@@ -119,6 +119,7 @@ export default {
         firstname: "",
         lastname_kana: "",
         firstname_kana: "",
+        gender: null,
         birth_year: "",
         birth_month: "",
         birth_day: "",

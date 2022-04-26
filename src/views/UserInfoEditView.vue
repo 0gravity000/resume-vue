@@ -28,14 +28,14 @@
         </div>
         <div class="input-group mb-3"><!--性別-->
           <div class="form-check">
-            <input class="form-check-input" type="radio" v-model="translateGender" value="男性" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="form-check-input" type="radio" v-model="UserModel.gender" value="1" name="genderRadio" id="genderRadioMale">
+            <label class="form-check-label" for="genderRadioMale">
               男性
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" v-model="translateGender" value="女性" name="flexRadioDefault" id="flexRadioDefault2">
-            <label class="form-check-label" for="flexRadioDefault2">
+            <input class="form-check-input" type="radio" v-model="UserModel.gender" value="2" name="genderRadio" id="genderRadioFemale">
+            <label class="form-check-label" for="genderRadioFemale">
               女性
             </label>
           </div>
@@ -85,10 +85,8 @@
           <input type="text" v-model="UserModel.commuting_time" class="form-control" placeholder="">
         </div>
         <div class="input-group mb-3">
-          <div class="form-check form-switch">
-            <input class="form-check-input" v-model="UserModel.dependents" type="checkbox" role="switch">
-            <label class="form-check-label">扶養家族（配偶者を除く）</label>
-          </div>
+          <span class="input-group-text">扶養家族（配偶者を除く）</span>
+          <input type="text" v-model="UserModel.dependents" class="form-control" placeholder="">
         </div>
         <div class="input-group mb-3">
           <div class="form-check form-switch">
@@ -102,7 +100,7 @@
             <label class="form-check-label">配偶者の扶養家族</label>
           </div>
         </div>
-        <button type="submit" @click="setUserInfo" class="btn btn-primary">登録</button>
+        <button type="button" @click="setUserInfo" class="btn btn-primary">登録</button>
       </form>
     </div>
   </div>
@@ -129,8 +127,31 @@ export default {
         auth_account_id: "",
         auth_account_email: ""
       },
-      UserModel: "",
-      selectedGender: "男性"
+      UserModel: {
+        account_id: "",
+        lastname: "",
+        firstname: "",
+        lastname_kana: "",
+        firstname_kana: "",
+        gender: null,
+        birth_year: "",
+        birth_month: "",
+        birth_day: "",
+        zipcode: "",
+        address: "",
+        address_kana: "",
+        contact: "",
+        contact_kana: "",
+        self_pr: "",
+        personal_request: "",
+        commuting_time: "",
+        dependents: "",
+        spouse: "",
+        dependents_of_spouse: "",
+        created_at: "",
+        updated_at: "",
+      },
+      //selectedGender: "男性"
     }
   },
   created (){
@@ -145,9 +166,11 @@ export default {
     computedUserModel: function(){
       return this.UserModel
     },
+    /*
     translateGender: function(){
-      return this.checkGenderRadio()
+      return this.UserModel.gender
     }
+    */
   },
   methods: {
     updateAuthInfo(data) {
@@ -155,18 +178,23 @@ export default {
       this.AccountModel = data
       this.$emit('update-auth-notification', this.AccountModel) //★
     },
+    /*
     checkGenderRadio() {
       let gender = ""
-      if (this.selectedGender == "男性") {
+      if (this.UserModel.gender == 1) {
         this.UserModel.gender = 1
         gender = "男性"
       } else if (this.selectedGender == "女性") {
         this.UserModel.gender = 2
         gender = "女性"
+      } else {
+        this.UserModel.gender = null
+        gender = ""
       }
+      console.log(gender)
       return gender
     },
-
+    */
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -208,33 +236,44 @@ export default {
     setUserInfo: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.post('/api/user', {
-        lastname: this.UserModel.lastname,
-        firstname: this.UserModel.firstname,
-        lastname_kana: this.UserModel.lastname_kana,
-        firstname_kana: this.UserModel.firstname_kana,
-        gender: this.UserModel.gender,
-        birth_year: this.UserModel.birth_year,
-        birth_month: this.UserModel.birth_month,
-        birth_day: this.UserModel.birth_day,
-        zipcode: this.UserModel.zipcode,
-        address: this.UserModel.address,
-        address_kana: this.UserModel.address_kana,
-        contact: this.UserModel.contact,
-        contact_kana: this.UserModel.contact_kana,
-        self_pr: this.UserModel.self_pr,
-        personal_request: this.UserModel.personal_request,
-        commuting_time: this.UserModel.commuting_time,
-        dependents: this.UserModel.dependents,
-        spouse: this.UserModel.spouse,
-        dependents_of_spouse: this.UserModel.dependents_of_spouse,
-      })
+        lastname: self.UserModel.lastname,
+        firstname: self.UserModel.firstname,
+        lastname_kana: self.UserModel.lastname_kana,
+        firstname_kana: self.UserModel.firstname_kana,
+        gender: self.UserModel.gender,
+        birth_year: self.UserModel.birth_year,
+        birth_month: self.UserModel.birth_month,
+        birth_day: self.UserModel.birth_day,
+        zipcode: self.UserModel.zipcode,
+        address: self.UserModel.address,
+        address_kana: self.UserModel.address_kana,
+        contact: self.UserModel.contact,
+        contact_kana: self.UserModel.contact_kana,
+        self_pr: self.UserModel.self_pr,
+        personal_request: self.UserModel.personal_request,
+        commuting_time: self.UserModel.commuting_time,
+        dependents: self.UserModel.dependents,
+        spouse: self.UserModel.spouse,
+        dependents_of_spouse: self.UserModel.dependents_of_spouse,
+      },)
       .then(function (res) {
         console.log(res.data)
         self.UserModel = res.data
+        self.$router.push({name: "userinfo"})
       })
       .catch(function (err) {
         console.log(err);
       });
+    },
+    postUserInfo: function(){
+      //await this.setUserInfo()
+      //await this.$router.push({name: "userinfo"})
+      /*
+      var result = new Promise(resolve => {
+        resolve(this.setUserInfo())
+        })
+      result.then( () => this.$router.push({name: "userinfo"}) );
+      */
     },
   }
 }
