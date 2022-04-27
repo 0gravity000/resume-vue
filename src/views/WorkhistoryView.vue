@@ -22,7 +22,7 @@
             <li class="list-group-item col">{{WorkhistoryModel.event_month}}</li>
           </ul>
         </div>
-        <div class="col-2">
+        <div class="col-8">
           <ul class="">
             <li class="list-group-item list-group-item-primary col">職歴</li>
             <li class="list-group-item col">{{WorkhistoryModel.event}}</li>
