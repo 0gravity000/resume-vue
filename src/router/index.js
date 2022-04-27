@@ -8,6 +8,12 @@ import LoginView from '../views/LoginView.vue'
 import LogoutView from '../views/LogoutView.vue'
 import UserInfoView from '../views/UserInfoView.vue'
 import UserInfoEditView from '../views/UserInfoEditView.vue'
+import EducationView from '../views/EducationView.vue'
+import EducationEditView from '../views/EducationEditView.vue'
+import WorkhistoryView from '../views/WorkhistoryView.vue'
+import WorkhistoryEditView from '../views/WorkhistoryEditView.vue'
+import QualificationView from '../views/QualificationView.vue'
+import QualificationEditView from '../views/QualificationEditView.vue'
 
 const routes = [
   {
@@ -58,6 +64,36 @@ const routes = [
     path: '/user/edit',
     name: 'userinfoedit',
     component: UserInfoEditView
+  },
+  {
+    path: '/education',
+    name: 'education',
+    component: EducationView
+  },
+  {
+    path: '/education/edit',
+    name: 'educationedit',
+    component: EducationEditView
+  },
+  {
+    path: '/workhistory',
+    name: 'workhistory',
+    component: WorkhistoryView
+  },
+  {
+    path: '/workhistory/edit',
+    name: 'workhistoryedit',
+    component: WorkhistoryEditView
+  },
+  {
+    path: '/qualification',
+    name: 'qualification',
+    component: QualificationView
+  },
+  {
+    path: '/qualification/edit',
+    name: 'qualificationedit',
+    component: QualificationEditView
   },
 
 ]

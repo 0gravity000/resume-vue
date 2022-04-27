@@ -111,7 +111,7 @@ import NavbarUser from '@/components/NavbarUser.vue'
 const axios = require('axios').default
 
 export default {
-  name: 'UserInfoView',
+  name: 'UserInfoEditView',
   components: {
     NavbarUser,
   },

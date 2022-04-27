@@ -12,18 +12,18 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about">
+            <router-link to="/education">
               <a class="nav-link">学歴</a>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about">
+            <router-link to="/workhistory">
               <a class="nav-link">職歴</a>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about">
-              <a class="nav-link">資格</a>
+            <router-link to="/qualification">
+              <a class="nav-link">資格・免許</a>
             </router-link>
           </li>
           <button type="button" @click="authLogout">ログアウト</button>
