@@ -1,5 +1,5 @@
 <template>
-  <div class="educationedit">
+  <div class="qualificationedit">
     <NavbarUser 
       :account="AccountModel"
       @update-auth-notification="updateAuthInfo"
@@ -137,3 +137,11 @@ export default {
   }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.qualificationedit {
+  text-align: start;
+}
+
+</style>
