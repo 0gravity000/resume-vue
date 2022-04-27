@@ -120,7 +120,7 @@ export default {
     },
     setQualificationInfo: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
-      axios.post('/api/education', {
+      axios.post('/api/qualification', {
         event_year: self.QualificationModel.qualification_year,
         event_month: self.QualificationModel.qualification_month,
         event: self.QualificationModel.qualification,

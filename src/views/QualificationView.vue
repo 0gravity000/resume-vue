@@ -98,9 +98,9 @@ export default {
         console.log(err);
       });
     },
-    getEdugetQualificationInfocationInfo: function () {
+    getQualificationInfo: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
-      axios.get('/api/education', {
+      axios.get('/api/qualification', {
       })
       .then(function (res) {
         console.log(res.data)

@@ -54,7 +54,7 @@ export default {
         auth_account_id: "",
         auth_account_email: ""
       },
-      EducationModel: ""
+      EducationModel: {}
     }
   },
   created (){
