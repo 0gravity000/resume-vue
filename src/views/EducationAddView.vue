@@ -5,7 +5,7 @@
       @update-auth-notification="updateAuthInfo"
     />
     <div class="container">
-      <h1>学歴編集</h1>
+      <h1>学歴追加</h1>
       <router-link to="/education">
         <a class="nav-link">戻る</a>
       </router-link>
@@ -37,7 +37,7 @@ import NavbarUser from '@/components/NavbarUser.vue'
 const axios = require('axios').default
 
 export default {
-  name: 'EducationEditView',
+  name: 'EducationAddView',
   components: {
     NavbarUser,
   },

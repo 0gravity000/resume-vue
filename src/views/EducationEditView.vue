@@ -116,7 +116,6 @@ export default {
       console.log("this.$route.params(json):" +JSON.stringify(this.$route.params))
       console.log("this.$route.params.id:" +this.$route.params.id)
       console.log("this.$route.params.id(json):" +JSON.stringify(this.$route.params.id))
-      this.EducationModel.id = JSON.stringify(this.$route.params.id)
       console.log("this.EducationModel:" +this.EducationModel)
       console.log("this.EducationModel(json):" +JSON.stringify(this.EducationModel))
       console.log("this.EducationModel.id:" +this.EducationModel.id)

@@ -13,18 +13,18 @@
         <div class="row g-3">
           <div class="col-2">
             <span class="input-group-text">年</span>
-            <input type="text" v-model="WorkhistoryModel.event_year" class="form-control" placeholder="年">
+            <input type="text" v-model="this.WorkhistoryModel.event_year" class="form-control" placeholder="年">
           </div>
           <div class="col-2">
             <span class="input-group-text">月</span>
-            <input type="text" v-model="WorkhistoryModel.event_month" class="form-control" placeholder="月">
+            <input type="text" v-model="this.WorkhistoryModel.event_month" class="form-control" placeholder="月">
           </div>
           <div class="col-8">
             <span class="input-group-text">職歴</span>
-            <input type="text" v-model="WorkhistoryModel.event" class="form-control" placeholder="職歴">
+            <input type="text" v-model="this.WorkhistoryModel.event" class="form-control" placeholder="職歴">
           </div>
           <div class="row g-3">
-            <button type="button" @click="setEducationInfo" class="btn btn-primary col-2">登録</button>
+            <button type="button" @click="editWorkhistoryInfo" class="btn btn-primary col-2">登録</button>
           </div>
         </div>
       </form>
@@ -37,7 +37,7 @@ import NavbarUser from '@/components/NavbarUser.vue'
 const axios = require('axios').default
 
 export default {
-  name: 'EducationEditView',
+  name: 'WorkhistoryEditView',
   components: {
     NavbarUser,
   },
@@ -54,6 +54,7 @@ export default {
         auth_account_email: ""
       },
       WorkhistoryModel: {
+        id: "",
         account_id: "",
         event_year: "",
         event_month: "",
@@ -107,6 +108,11 @@ export default {
       });
     },
     getWorkhistoryInfo: function () {
+      this.WorkhistoryModel.id = this.$route.params.id
+      this.WorkhistoryModel.event_year = this.$route.params.event_year
+      this.WorkhistoryModel.event_month = this.$route.params.event_month
+      this.WorkhistoryModel.event = this.$route.params.event
+      /*
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.get('/api/workhistoy', {
       })
@@ -117,10 +123,12 @@ export default {
       .catch(function (err) {
         console.log(err);
       });
+      */
     },
-    setEducationInfo: function () {
+      editWorkhistoryInfo: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
-      axios.post('/api/workhistoy', {
+      axios.put('/api/workhistoy', {
+        id: self.WorkhistoryModel.id,
         event_year: self.WorkhistoryModel.event_year,
         event_month: self.WorkhistoryModel.event_month,
         event: self.WorkhistoryModel.event,

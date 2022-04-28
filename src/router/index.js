@@ -13,6 +13,7 @@ import EducationEditView from '../views/EducationEditView.vue'
 import EducationAddView from '../views/EducationAddView.vue'
 import WorkhistoryView from '../views/WorkhistoryView.vue'
 import WorkhistoryEditView from '../views/WorkhistoryEditView.vue'
+import WorkhistoryAddView from '../views/WorkhistoryAddView.vue'
 import QualificationView from '../views/QualificationView.vue'
 import QualificationEditView from '../views/QualificationEditView.vue'
 
@@ -85,6 +86,11 @@ const routes = [
     path: '/workhistory',
     name: 'workhistory',
     component: WorkhistoryView
+  },
+  {
+    path: '/workhistory/add',
+    name: 'workhistoryadd',
+    component: WorkhistoryAddView
   },
   {
     path: '/workhistory/edit',
