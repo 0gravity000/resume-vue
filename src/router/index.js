@@ -16,6 +16,7 @@ import WorkhistoryEditView from '../views/WorkhistoryEditView.vue'
 import WorkhistoryAddView from '../views/WorkhistoryAddView.vue'
 import QualificationView from '../views/QualificationView.vue'
 import QualificationEditView from '../views/QualificationEditView.vue'
+import QualificationAddView from '../views/QualificationAddView.vue'
 
 const routes = [
   {
@@ -101,6 +102,11 @@ const routes = [
     path: '/qualification',
     name: 'qualification',
     component: QualificationView
+  },
+  {
+    path: '/qualification/add',
+    name: 'qualificationadd',
+    component: QualificationAddView
   },
   {
     path: '/qualification/edit',

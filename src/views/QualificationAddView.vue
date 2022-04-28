@@ -1,11 +1,11 @@
 <template>
-  <div class="qualificationedit">
+  <div class="qualificationadd">
     <NavbarUser 
       :account="AccountModel"
       @update-auth-notification="updateAuthInfo"
     />
     <div class="container">
-      <h1>資格・免許編集</h1>
+      <h1>資格・免許追加</h1>
       <router-link to="/qualification">
         <a class="nav-link">戻る</a>
       </router-link>
@@ -13,18 +13,18 @@
         <div class="row g-3">
           <div class="col-2">
             <span class="input-group-text">年</span>
-            <input type="text" v-model="this.QualificationModel.qualification_year" class="form-control" placeholder="年">
+            <input type="text" v-model="temp_qualification_year" class="form-control" placeholder="年">
           </div>
           <div class="col-2">
             <span class="input-group-text">月</span>
-            <input type="text" v-model="this.QualificationModel.qualification_month" class="form-control" placeholder="月">
+            <input type="text" v-model="temp_qualification_month" class="form-control" placeholder="月">
           </div>
           <div class="col-8">
             <span class="input-group-text">学歴</span>
-            <input type="text" v-model="this.QualificationModel.qualification" class="form-control" placeholder="資格・免許">
+            <input type="text" v-model="temp_qualification" class="form-control" placeholder="資格・免許">
           </div>
           <div class="row g-3">
-            <button type="button" @click="editQualificationInfo" class="btn btn-primary col-2">登録</button>
+            <button type="button" @click="addQualificationInfo" class="btn btn-primary col-2">登録</button>
           </div>
         </div>
       </form>
@@ -37,7 +37,7 @@ import NavbarUser from '@/components/NavbarUser.vue'
 const axios = require('axios').default
 
 export default {
-  name: 'EducationEditView',
+  name: 'QualificationAddView',
   components: {
     NavbarUser,
   },
@@ -108,12 +108,6 @@ export default {
       });
     },
     getQualificationInfo: function () {
-      this.QualificationModel.id = this.$route.params.id
-      //this.QualificationModel.account_id = this.$route.params.account_id
-      this.QualificationModel.qualification_year = this.$route.params.qualification_year
-      this.QualificationModel.qualification_month = this.$route.params.qualification_month
-      this.QualificationModel.qualification = this.$route.params.qualification
-      /*
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.get('/api/qualification', {
       })
@@ -124,15 +118,13 @@ export default {
       .catch(function (err) {
         console.log(err);
       });
-      */
     },
-    editQualificationInfo: function () {
+    addQualificationInfo: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
-      axios.put('/api/qualification', {
-        id: self.QualificationModel.id,
-        qualification_year: self.QualificationModel.qualification_year,
-        qualification_month: self.QualificationModel.qualification_month,
-        qualification: self.QualificationModel.qualification,
+      axios.post('/api/qualification', {
+        qualification_year: this.temp_qualification_year,
+        qualification_month: this.temp_qualification_month,
+        qualification: this.temp_qualification,
       },)
       .then(function (res) {
         console.log(res.data)
@@ -149,7 +141,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.qualificationedit {
+.qualificationadd {
   text-align: start;
 }
 

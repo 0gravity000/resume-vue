@@ -6,9 +6,36 @@
     />
     <div class="container">
       <h1>資格・免許</h1>
-      <router-link to="/qualification/edit">
-        <a class="nav-link">編集</a>
+      <router-link to="/qualification/add">
+        <a class="nav-link">追加</a>
       </router-link>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">年</th>
+            <th scope="col">月</th>
+            <th scope="col">資格・免許</th>
+            <th scope="col">#</th>
+            <th scope="col">#</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in QualificationModel" :key="item.id">
+            <td>{{item.qualification_year}}</td>
+            <td>{{item.qualification_month}}</td>
+            <td>{{item.qualification}}</td>
+            <td>
+              <button @click="onClickEditButton(item)">編集</button>
+            </td>
+            <td>
+              <button @click="onClickDeleteButton">削除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!--
       <div class="row g-3">
         <div class="col-2">
           <ul class="">
@@ -29,6 +56,7 @@
           </ul>
         </div>
       </div>
+      -->
     </div>
   </div>
 </template>
@@ -54,7 +82,7 @@ export default {
         auth_account_id: "",
         auth_account_email: ""
       },
-      QualificationModel: ""
+      QualificationModel: {}
     }
   },
   created (){
@@ -67,6 +95,11 @@ export default {
   computed: {
   },
   methods: {
+    onClickEditButton (item) {
+      console.log("item:" + JSON.stringify(item))
+      console.log("id:" + item.id)
+      this.$router.push({name: "qualificationedit", params: {id: item.id, qualification_year: item.qualification_year, qualification_month: item.qualification_month, qualification: item.qualification}})
+    },
     updateAuthInfo(data) {
       console.log(data)
       this.AccountModel = data

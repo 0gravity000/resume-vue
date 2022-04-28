@@ -60,7 +60,7 @@ export default {
         auth_account_id: "",
         auth_account_email: ""
       },
-      WorkhistoryModel: ""
+      WorkhistoryModel: {}
     }
   },
   created (){
