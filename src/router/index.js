@@ -10,6 +10,7 @@ import UserInfoView from '../views/UserInfoView.vue'
 import UserInfoEditView from '../views/UserInfoEditView.vue'
 import EducationView from '../views/EducationView.vue'
 import EducationEditView from '../views/EducationEditView.vue'
+import EducationAddView from '../views/EducationAddView.vue'
 import WorkhistoryView from '../views/WorkhistoryView.vue'
 import WorkhistoryEditView from '../views/WorkhistoryEditView.vue'
 import QualificationView from '../views/QualificationView.vue'
@@ -69,6 +70,11 @@ const routes = [
     path: '/education',
     name: 'education',
     component: EducationView
+  },
+  {
+    path: '/education/add',
+    name: 'educationadd',
+    component: EducationAddView
   },
   {
     path: '/education/edit',

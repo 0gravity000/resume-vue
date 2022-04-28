@@ -1,68 +1,33 @@
 <template>
-  <div class="education">
+  <div class="educationadd">
     <NavbarUser 
       :account="AccountModel"
       @update-auth-notification="updateAuthInfo"
     />
     <div class="container">
-      <h1>学歴</h1>
-      <router-link to="/education/add">
-        <a class="nav-link">追加</a>
+      <h1>学歴編集</h1>
+      <router-link to="/education">
+        <a class="nav-link">戻る</a>
       </router-link>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">年</th>
-            <th scope="col">月</th>
-            <th scope="col">学歴</th>
-            <th scope="col">#</th>
-            <th scope="col">#</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in EducationModel" :key="item.id">
-            <td>{{item.event_year}}</td>
-            <td>{{item.event_month}}</td>
-            <td>{{item.event}}</td>
-            <td>
-              <button @click="onClickEditButton(item)">編集</button>
-            </td>
-            <td>
-              <button @click="onClickDeleteButton">削除</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!--
-      <div class="row g-3">
-        <div class="col-2">
-          <ul class="">
-            <li class="list-group-item list-group-item-primary col">年</li>
-            <li class="list-group-item col" v-for="item in EducationModel" :key="item.account_id">
-              {{item.event_year}}
-              </li>
-          </ul>
+      <form>
+        <div class="row g-3">
+          <div class="col-2">
+            <span class="input-group-text">年</span>
+            <input type="text" v-model="temp_event_year" class="form-control" placeholder="年">
+          </div>
+          <div class="col-2">
+            <span class="input-group-text">月</span>
+            <input type="text" v-model="temp_event_month" class="form-control" placeholder="月">
+          </div>
+          <div class="col-8">
+            <span class="input-group-text">学歴</span>
+            <input type="text" v-model="temp_event" class="form-control" placeholder="学歴">
+          </div>
+          <div class="row g-3">
+            <button type="button" @click="addEducationInfo" class="btn btn-primary col-2">登録</button>
+          </div>
         </div>
-        <div class="col-2">
-          <ul class="">
-            <li class="list-group-item list-group-item-primary col">月</li>
-            <li class="list-group-item col" v-for="item in EducationModel" :key="item.account_id">
-              {{item.event_month}}
-            </li>
-          </ul>
-        </div>
-        <div class="col-8">
-          <ul class="">
-            <li class="list-group-item list-group-item-primary col">学歴</li>
-            <li class="list-group-item col" v-for="item in EducationModel" :key="item.account_id">
-              {{item.event}}
-            </li>
-          </ul>
-        </div>
-      </div>
-      -->
+      </form>
     </div>
   </div>
 </template>
@@ -72,7 +37,7 @@ import NavbarUser from '@/components/NavbarUser.vue'
 const axios = require('axios').default
 
 export default {
-  name: 'EducationView',
+  name: 'EducationEditView',
   components: {
     NavbarUser,
   },
@@ -88,33 +53,29 @@ export default {
         auth_account_id: "",
         auth_account_email: ""
       },
-      EducationModel: {},
-      //selectedItem: {},
+      EducationModel: {
+        id: "",
+        account_id: "",
+        event_year: "",
+        event_month: "",
+        event: "",
+        created_at: "",
+        updated_at: "",
+      },
+      //selectedGender: "男性"
     }
   },
   created (){
     this.authCheck()
   },
   mounted () {
+    //this.authCheck()
     this.AccountModel = this.account
     this.getEducationInfo()
   },
   computed: {
   },
   methods: {
-    onClickEditButton (item) {
-      console.log("item:" + JSON.stringify(item))
-      console.log("id:" + item.id)
-      //const json_item = JSON.stringify(item)
-      //console.log("id(json):" + json_item.id)
-      //console.log("this.selectedItem:" + JSON.stringify(this.selectedItem))
-      //this.$emit('edit-education-notification', item) //
-      this.$router.push({name: "educationedit", params: {id: item.id, event_year: item.event_year, event_month: item.event_month, event: item.event}})
-      //this.$router.push({name: "educationedit", params: {selectedItem: item}})
-    },
-    onClickDeleteButton () {
-
-    },
     updateAuthInfo(data) {
       console.log(data)
       this.AccountModel = data
@@ -158,13 +119,29 @@ export default {
         console.log(err);
       });
     },
+    addEducationInfo: function () {
+      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
+      axios.post('/api/education', {
+        event_year: this.temp_event_year,
+        event_month: this.temp_event_month,
+        event: this.temp_event,
+      },)
+      .then(function (res) {
+        console.log(res.data)
+        self.EducationModel = res.data
+        self.$router.push({name: "education"})
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    },
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.education {
+.educationadd {
   text-align: start;
 }
 

@@ -13,18 +13,18 @@
         <div class="row g-3">
           <div class="col-2">
             <span class="input-group-text">年</span>
-            <input type="text" v-model="EducationModel.event_year" class="form-control" placeholder="年">
+            <input type="text" v-model="this.EducationModel.event_year" class="form-control" placeholder="年">
           </div>
           <div class="col-2">
             <span class="input-group-text">月</span>
-            <input type="text" v-model="EducationModel.event_month" class="form-control" placeholder="月">
+            <input type="text" v-model="this.EducationModel.event_month" class="form-control" placeholder="月">
           </div>
           <div class="col-8">
             <span class="input-group-text">学歴</span>
-            <input type="text" v-model="EducationModel.event" class="form-control" placeholder="学歴">
+            <input type="text" v-model="this.EducationModel.event" class="form-control" placeholder="学歴">
           </div>
           <div class="row g-3">
-            <button type="button" @click="setEducationInfo" class="btn btn-primary col-2">登録</button>
+            <button type="button" @click="editEducationInfo" class="btn btn-primary col-2">登録</button>
           </div>
         </div>
       </form>
@@ -44,6 +44,9 @@ export default {
   props: {
     account: {
       type : Object,
+    },
+    item: {
+      type : Object,
     }
   },
   data () {
@@ -54,6 +57,7 @@ export default {
         auth_account_email: ""
       },
       EducationModel: {
+        id: "",
         account_id: "",
         event_year: "",
         event_month: "",
@@ -107,6 +111,26 @@ export default {
       });
     },
     getEducationInfo: function () {
+      //console.log("item:" +item)
+      console.log("this.$route.params:" +this.$route.params)
+      console.log("this.$route.params(json):" +JSON.stringify(this.$route.params))
+      console.log("this.$route.params.id:" +this.$route.params.id)
+      console.log("this.$route.params.id(json):" +JSON.stringify(this.$route.params.id))
+      this.EducationModel.id = JSON.stringify(this.$route.params.id)
+      console.log("this.EducationModel:" +this.EducationModel)
+      console.log("this.EducationModel(json):" +JSON.stringify(this.EducationModel))
+      console.log("this.EducationModel.id:" +this.EducationModel.id)
+
+      this.EducationModel.id = this.$route.params.id
+      //this.EducationModel.account_id = this.$route.params.account_id
+      this.EducationModel.event_year = this.$route.params.event_year
+      this.EducationModel.event_month = this.$route.params.event_month
+      this.EducationModel.event = this.$route.params.event
+      //this.EducationModel.created_at = this.$route.params.created_at
+      //this.EducationModel.updated_at = this.$route.params.updated_at
+      //console.log("this.$route.params.selectedItem_id:" +this.$route.params.selectedItem_id)
+      //console.log("this.$route.params.selectedItem_id(json):" +JSON.stringify(this.$route.params.selectedItem_id))
+      /*
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.get('/api/education', {
       })
@@ -117,10 +141,12 @@ export default {
       .catch(function (err) {
         console.log(err);
       });
+      */
     },
-    setEducationInfo: function () {
+    editEducationInfo: function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
-      axios.post('/api/education', {
+      axios.put('/api/education', {
+        id: self.EducationModel.id,
         event_year: self.EducationModel.event_year,
         event_month: self.EducationModel.event_month,
         event: self.EducationModel.event,
