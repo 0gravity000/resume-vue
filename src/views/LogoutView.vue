@@ -16,17 +16,19 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
     }
   },
   created() {
   },
   mounted () {
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
     //this.authCheck()
   },
   methods: {

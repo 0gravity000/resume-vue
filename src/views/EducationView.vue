@@ -1,6 +1,8 @@
 <template>
   <div class="education">
-    <NavbarUser />
+    <NavbarUser
+      @update-auth-notification="updateAuthInfo"
+    />
     <div class="container">
       <h1>学歴</h1>
       <router-link to="/education/add">
@@ -92,7 +94,7 @@ export default {
     }
   },
   created (){
-    this.authCheck()
+    //this.authCheck()
   },
   mounted () {
     //this.AccountModel = this.account
@@ -119,13 +121,13 @@ export default {
     onClickDeleteButton () {
 
     },
-    /*
     updateAuthInfo(data) {
+      console.log("EducationView：")
       console.log(data)
-      this.AccountModel = data
-      this.$emit('update-auth-notification', this.AccountModel) //★
+      //this.AccountModel = data
+      this.$emit('update-auth-notification', data)
+      //this.$emit('update-auth-notification', this.AccountModel)
     },
-    */
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})

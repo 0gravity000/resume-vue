@@ -37,7 +37,7 @@ export default {
     }
   },
   created (){
-    this.authCheck()
+    //this.authCheck()
   },
   mounted () {
     //this.showHomeView()

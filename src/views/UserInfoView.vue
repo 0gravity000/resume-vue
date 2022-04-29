@@ -1,6 +1,8 @@
 <template>
   <div class="userinfo">
-    <NavbarUser />
+    <NavbarUser
+      @update-auth-notification="updateAuthInfo"
+    />
     <div class="container">
       <h1>基本情報</h1>
       <router-link to="/user/edit">
@@ -140,7 +142,7 @@ export default {
     }
   },
   created (){
-    this.authCheck()
+    //this.authCheck()
   },
   mounted () {
     //this.AccountModel = this.account
@@ -163,7 +165,6 @@ export default {
     },
   },
   methods: {
-    /*
     updateAuthInfo(data) {
       console.log("UserInfoView：")
       console.log(data)
@@ -171,7 +172,6 @@ export default {
       this.$emit('update-auth-notification', data)
       //this.$emit('update-auth-notification', this.AccountModel)
     },
-    */
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})

@@ -1,6 +1,8 @@
 <template>
   <div class="workhistoryadd">
-    <NavbarUser />
+    <NavbarUser
+      @update-auth-notification="updateAuthInfo"
+    />
     <div class="container">
       <h1>職歴追加</h1>
       <router-link to="/workhistory">
@@ -64,7 +66,7 @@ export default {
     }
   },
   created (){
-    this.authCheck()
+    //this.authCheck()
   },
   mounted () {
     //this.authCheck()
@@ -74,13 +76,13 @@ export default {
   computed: {
   },
   methods: {
-    /*
     updateAuthInfo(data) {
+      console.log("WorkhistoryAddView：")
       console.log(data)
-      this.AccountModel = data
-      this.$emit('update-auth-notification', this.AccountModel) //★
+      //this.AccountModel = data
+      this.$emit('update-auth-notification', data)
+      //this.$emit('update-auth-notification', this.AccountModel)
     },
-    */
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})

@@ -1,6 +1,8 @@
 <template>
   <div class="qualification">
-    <NavbarUser />
+    <NavbarUser
+      @update-auth-notification="updateAuthInfo"
+    />
     <div class="container">
       <h1>資格・免許</h1>
       <router-link to="/qualification/add">
@@ -85,7 +87,7 @@ export default {
     }
   },
   created (){
-    this.authCheck()
+    //this.authCheck()
   },
   mounted () {
     //this.AccountModel = this.account
@@ -104,13 +106,13 @@ export default {
       console.log("id:" + item.id)
       this.$router.push({name: "qualificationedit", params: {id: item.id, qualification_year: item.qualification_year, qualification_month: item.qualification_month, qualification: item.qualification}})
     },
-    /*
     updateAuthInfo(data) {
+      console.log("QualificationView：")
       console.log(data)
-      this.AccountModel = data
-      this.$emit('update-auth-notification', this.AccountModel) //★
+      //this.AccountModel = data
+      this.$emit('update-auth-notification', data)
+      //this.$emit('update-auth-notification', this.AccountModel)
     },
-    */
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})

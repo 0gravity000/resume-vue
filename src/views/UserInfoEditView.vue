@@ -1,6 +1,8 @@
 <template>
   <div class="userinfoedit">
-    <NavbarUser />
+    <NavbarUser
+      @update-auth-notification="updateAuthInfo"
+    />
     <div class="container">
       <h1>基本情報編集</h1>
       <router-link to="/user">
@@ -154,7 +156,7 @@ export default {
     }
   },
   created (){
-    this.authCheck()
+    //this.authCheck()
   },
   mounted () {
     //this.authCheck()
@@ -173,13 +175,13 @@ export default {
     */
   },
   methods: {
-    /*
     updateAuthInfo(data) {
+      console.log("UserInfoEditView：")
       console.log(data)
-      this.AccountModel = data
-      this.$emit('update-auth-notification', this.AccountModel) //★
+      //this.AccountModel = data
+      this.$emit('update-auth-notification', data)
+      //this.$emit('update-auth-notification', this.AccountModel)
     },
-    */
     /*
     checkGenderRadio() {
       let gender = ""
