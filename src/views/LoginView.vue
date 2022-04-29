@@ -34,15 +34,17 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
     }
   },
   mounted () {
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
     //this.showLoginView()
     //this.authCheck()
   },
@@ -78,15 +80,17 @@ export default {
     authLogin: async function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.post('/api/login', {
-        email: this.email,
-        password: this.password
+        email: this.email,  //疑問:これでいい？
+        password: this.password //疑問:これでいい？
       })
       .then(function (res) {
-        console.log(res);
-        self.$emit('update-auth-notification', res.data) //★
+        console.log("LoginView：");
+        console.log(res.data);
+        self.$emit('update-auth-notification', res.data)
         self.$router.push({name: "home"})
       })
       .catch(function (err) {
+        console.log("LoginView：");
         console.log(err);
       });
     }

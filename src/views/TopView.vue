@@ -51,15 +51,18 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       }
+      */
     }
   },
   mounted () {
-    this.AccountModel = this.account
+    console.log("TopView.vue：mounted");
+    //this.AccountModel = this.account
     //this.authCheck()
   },
   beforeUnmount() {

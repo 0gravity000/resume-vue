@@ -45,16 +45,18 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
     }
   },
   mounted () {
     //this.authCheck()
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
   },
   methods: {
     authLogout: function () {
@@ -64,11 +66,13 @@ export default {
         //password: this.password
       })
       .then(function (res) {
-        console.log(res);
-        self.$emit('update-auth-notification', res.data) //★
+        console.log("NavbarUserView.vue：")
+        console.log(res.data);
+        self.$emit('update-auth-notification', res.data)
         self.$router.push({name: "logout"})
       })
       .catch(function (err) {
+        console.log("NavbarUserView.vue：")
         console.log(err);
       });
     },

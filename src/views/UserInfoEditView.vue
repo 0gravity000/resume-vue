@@ -1,9 +1,6 @@
 <template>
   <div class="userinfoedit">
-    <NavbarUser 
-      :account="AccountModel"
-      @update-auth-notification="updateAuthInfo"
-    />
+    <NavbarUser />
     <div class="container">
       <h1>基本情報編集</h1>
       <router-link to="/user">
@@ -122,11 +119,13 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
       UserModel: {
         account_id: "",
         lastname: "",
@@ -159,11 +158,12 @@ export default {
   },
   mounted () {
     //this.authCheck()
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
     this.getUserInfo()
   },
   computed: {
     computedUserModel: function(){
+      console.log("UserInfoEditView：computedUserModel")
       return this.UserModel
     },
     /*
@@ -173,11 +173,13 @@ export default {
     */
   },
   methods: {
+    /*
     updateAuthInfo(data) {
       console.log(data)
       this.AccountModel = data
       this.$emit('update-auth-notification', this.AccountModel) //★
     },
+    */
     /*
     checkGenderRadio() {
       let gender = ""
@@ -200,24 +202,27 @@ export default {
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
     },
     authCheck: async function () {
-      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
+      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/')
       await this.resolveAfterxSecond()
       axios.get('/api/authcheck', {
       })
       .then(function (res) {
+        console.log("UserInfoEditView：")
         console.log(res.data)
-        self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_account_id = res.data.auth_account_id
-        self.AccountModel.auth_account_email = res.data.auth_account_email
+        //self.AccountModel.is_authenticated = res.data.is_authenticated
+        //self.AccountModel.auth_account_id = res.data.auth_account_id
+        //self.AccountModel.auth_account_email = res.data.auth_account_email
         if(res.data.is_authenticated == false) {  //認証がない場合TOP画面へリダイレクト
           self.$router.push({name: "top"})
         }
+        self.$emit('update-auth-notification', res.data)
       })
       .then(function () {
-        console.log("then 2nd")
-        self.$emit('update-auth-notification', self.AccountModel) //★
+        //console.log("then 2nd")
+        //self.$emit('update-auth-notification', self.AccountModel) //★
       })
       .catch(function (err) {
+        console.log("UserInfoEditView：")
         console.log(err);
       });
     },
@@ -226,10 +231,12 @@ export default {
       axios.get('/api/user', {
       })
       .then(function (res) {
+        console.log("UserInfoEditView：")
         console.log(res.data)
         self.UserModel = res.data
       })
       .catch(function (err) {
+        console.log("UserInfoEditView：")
         console.log(err);
       });
     },
@@ -257,11 +264,13 @@ export default {
         dependents_of_spouse: self.UserModel.dependents_of_spouse,
       },)
       .then(function (res) {
+        console.log("UserInfoEditView：")
         console.log(res.data)
         self.UserModel = res.data
         self.$router.push({name: "userinfo"})
       })
       .catch(function (err) {
+        console.log("UserInfoEditView：")
         console.log(err);
       });
     },

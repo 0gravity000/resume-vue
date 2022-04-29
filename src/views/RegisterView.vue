@@ -34,20 +34,23 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
       accountList: [],
+      */
     }
   },
   mounted () {
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
     //this.authCheck()
     //this.updataAccountList()
   },
   methods: {
+    /*
     updataAccountList: async function () {
       axios
         .get("/api/register")
@@ -60,6 +63,7 @@ export default {
         });
       console.log(this.accountList)
     },
+    */
     /*
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
@@ -88,11 +92,12 @@ export default {
     postAccount: async function () {
       let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
       axios.post('/api/register', {
-        email: this.email,
-        password: this.password
+        email: this.email,  //疑問:これでいい？
+        password: this.password //疑問:これでいい？
       })
       .then(function (res) {
-        console.log(res);
+        console.log("Register.vue：");
+        console.log(res.data);
         self.$emit('update-auth-notification', res.data) //★
         //ユーザー認証に成功したらホーム画面に遷移
         if (res.data.result == "OK") {
@@ -100,6 +105,7 @@ export default {
         }
       })
       .catch(function (err) {
+        console.log("Register.vue：");
         console.log(err);
       });
     }

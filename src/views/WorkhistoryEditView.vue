@@ -1,9 +1,6 @@
 <template>
   <div class="workhistoryedit">
-    <NavbarUser 
-      :account="AccountModel"
-      @update-auth-notification="updateAuthInfo"
-    />
+    <NavbarUser />
     <div class="container">
       <h1>職歴編集</h1>
       <router-link to="/workhistory">
@@ -48,11 +45,13 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
       WorkhistoryModel: {
         id: "",
         account_id: "",
@@ -70,17 +69,23 @@ export default {
   },
   mounted () {
     //this.authCheck()
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
     this.getWorkhistoryInfo()
   },
   computed: {
+    computedWorkhistoryModel: function(){
+      console.log("WorkhistoryView：computedWorkhistoryModel")
+      return this.WorkhistoryModel
+    },
   },
   methods: {
+    /*
     updateAuthInfo(data) {
       console.log(data)
       this.AccountModel = data
       this.$emit('update-auth-notification', this.AccountModel) //★
     },
+    */
     resolveAfterxSecond() {
       //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
@@ -91,23 +96,28 @@ export default {
       axios.get('/api/authcheck', {
       })
       .then(function (res) {
+        console.log("WorkhistoryEditView：")
         console.log(res.data)
-        self.AccountModel.is_authenticated = res.data.is_authenticated
-        self.AccountModel.auth_account_id = res.data.auth_account_id
-        self.AccountModel.auth_account_email = res.data.auth_account_email
+        //self.AccountModel.is_authenticated = res.data.is_authenticated
+        //self.AccountModel.auth_account_id = res.data.auth_account_id
+        //self.AccountModel.auth_account_email = res.data.auth_account_email
         if(res.data.is_authenticated == false) {  //認証がない場合TOP画面へリダイレクト
           self.$router.push({name: "top"})
         }
+        self.$emit('update-auth-notification', res.data)
       })
       .then(function () {
-        console.log("then 2nd")
-        self.$emit('update-auth-notification', self.AccountModel) //★
+        //console.log("then 2nd")
+        //self.$emit('update-auth-notification', self.AccountModel) //★
       })
       .catch(function (err) {
+        console.log("WorkhistoryEditView：")
         console.log(err);
       });
     },
     getWorkhistoryInfo: function () {
+      console.log("WorkhistoryEditView：")
+      console.log("this.$route.params:" +this.$route.params)
       this.WorkhistoryModel.id = this.$route.params.id
       this.WorkhistoryModel.event_year = this.$route.params.event_year
       this.WorkhistoryModel.event_month = this.$route.params.event_month
@@ -134,11 +144,13 @@ export default {
         event: self.WorkhistoryModel.event,
       },)
       .then(function (res) {
+        console.log("WorkhistoryEditView：")
         console.log(res.data)
         self.WorkhistoryModel = res.data
         self.$router.push({name: "workhistory"})
       })
       .catch(function (err) {
+        console.log("WorkhistoryEditView：")
         console.log(err);
       });
     },

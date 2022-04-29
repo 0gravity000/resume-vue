@@ -10,22 +10,26 @@
 export default {
   name: 'AboutView',
   props: {
+    /*
     account: {
       type : Object,
     }
+    */
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
     }
   },
   mounted () {
     //this.authCheck()
-    this.AccountModel = this.account
+    //this.AccountModel = this.account
   },
   methods: {
     /*

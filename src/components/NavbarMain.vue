@@ -9,7 +9,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <div v-if="isauthenticated">
+          <div v-if="isAuthenticated">
             <li class="nav-item">
               <router-link to="/home">
                 <a class="nav-link active" aria-current="page">Home</a>
@@ -24,7 +24,7 @@
         </ul>
       </div>
       <div class="d-flex flex-row-reverse bd-highlight">
-        <div class="p-2 bd-highlight">{{authuseremail}}</div>
+        <div class="p-2 bd-highlight">{{authAccountEmail}}</div>
       </div>
     </div>
   </nav>
@@ -40,32 +40,38 @@ export default {
   },
   data () {
     return {
+      /*
       AccountModel: {
         is_authenticated: "",
         auth_account_id: "",
         auth_account_email: ""
       },
+      */
     }
   },
   updateed () {
-    this.syncAuthInfo()
+    //this.syncAuthInfo()
   },
   mounted () {
     //this.authCheck()
-    this.syncAuthInfo()
+    //this.syncAuthInfo()
   },
   methods: {
+    /*
     syncAuthInfo(){
       this.AccountModel = this.account
     },
+    */
   },
   computed: {
-    isauthenticated: function(){
-      this.syncAuthInfo()
+    isAuthenticated: function(){
+      //this.syncAuthInfo()
+      console.log("NavbarMain.vue：isAuthenticated")
       return this.account.is_authenticated
     },
-    authuseremail: function(){
-      this.syncAuthInfo()
+    authAccountEmail: function(){
+      //this.syncAuthInfo()
+      console.log("NavbarMain.vue：authAccountEmail")
       return this.account.auth_account_email
     },
   }

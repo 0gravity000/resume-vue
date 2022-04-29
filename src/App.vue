@@ -1,7 +1,6 @@
 <template>
   <NavbarMain 
     :account="AccountModel"
-    @update-auth-notification="updateAuthInfo"
   />
   <router-view 
     :account="AccountModel"
@@ -32,27 +31,30 @@ export default {
   },
   methods: {
     updateAuthInfo(data) {
+      console.log("app.vue：")
       console.log(data)
       this.AccountModel.is_authenticated = data.is_authenticated
       this.AccountModel.auth_account_id = data.auth_account_id
       this.AccountModel.auth_account_email = data.auth_account_email
     },
     resolveAfterxSecond() {
-      //GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
+      //要調査：GAE環境で、ログイン状態なのにcurrent_userが空で返ってくることがあるため、スリープを入れる
       return new Promise(resolve => {setTimeout(()=> {resolve("wait")}, 500)})
     },
     authCheck: async function () {
-      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/') NG
+      let self = this;  //promiseコールバック関数内でthisは使えないので回避用 this.$router.push('/')
       await this.resolveAfterxSecond()
       axios.get('/api/authcheck', {
       })
       .then(function (res) {
+        console.log("app.vue：")
         console.log(res.data)
         self.AccountModel.is_authenticated = res.data.is_authenticated
         self.AccountModel.auth_account_id = res.data.auth_account_id
         self.AccountModel.auth_account_email = res.data.auth_account_email
       })
       .catch(function (err) {
+        console.log("app.vue：")
         console.log(err);
       });
     },
