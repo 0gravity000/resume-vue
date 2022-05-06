@@ -30,15 +30,15 @@
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">生年月日（年）</li>
-        <li class="list-group-item col-4">{{UserModel.birth_year}}</li>
+        <li class="list-group-item col-4">{{UserModel.birth_year}}年({{convertYearToJapaneseYear(UserModel.birth_year)}})</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">生年月日（月）</li>
-        <li class="list-group-item col-4">{{UserModel.birth_month}}</li>
+        <li class="list-group-item col-4">{{UserModel.birth_month}}月</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">生年月日（日）</li>
-        <li class="list-group-item col-4">{{UserModel.birth_day}}</li>
+        <li class="list-group-item col-4">{{UserModel.birth_day}}日</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">郵便番号</li>
@@ -74,15 +74,15 @@
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">扶養家族（配偶者を除く）</li>
-        <li class="list-group-item col-4">{{UserModel.dependents}}</li>
+        <li class="list-group-item col-4">{{UserModel.dependents}}人</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">配偶者</li>
-        <li class="list-group-item col-4">{{UserModel.spouse}}</li>
+        <li class="list-group-item col-4">{{translateSpouse}}</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">配偶者の扶養家族</li>
-        <li class="list-group-item col-4">{{UserModel.dependents_of_spouse}}</li>
+        <li class="list-group-item col-4">{{translateDependentsOfSpouse}}</li>
       </ul>
     </div>
 
@@ -163,8 +163,40 @@ export default {
       }
       return gender
     },
+    translateSpouse: function(){
+      let spouse = ""
+      if (this.UserModel.spouse == true) {
+        spouse = "有"
+      } else {
+        spouse = "無"
+      }
+      return spouse
+    },
+    translateDependentsOfSpouse: function(){
+      let spouse = ""
+      if (this.UserModel.dependents_of_spouse == true) {
+        spouse = "有"
+      } else {
+        spouse = "無"
+      }
+      return spouse
+    },
   },
   methods: {
+    convertYearToJapaneseYear(year) {
+      //console.log(year)
+      if (year >= 2019) {
+        //console.log("令和？")
+        return "令和" + (year - 2018) + "年"
+      } else if (year >= 1989 && year < 2019) {
+        //console.log("平成？")
+        //console.log("平成" + (year - 1988) + "年")
+        return "平成" + (year - 1988) + "年"
+      } else {
+        //console.log("昭和？")
+        return "昭和" + (year - 1924) + "年"
+      }
+    },
     updateAuthInfo(data) {
       console.log("UserInfoView：")
       console.log(data)

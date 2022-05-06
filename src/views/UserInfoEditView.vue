@@ -9,22 +9,36 @@
         <a class="nav-link">戻る</a>
       </router-link>
       <form>
-        <div class="input-group mb-3">
-          <span class="input-group-text">姓</span>
-          <input type="text" v-model="UserModel.lastname" class="form-control" placeholder="姓">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">姓かな</span>
-          <input type="text" v-model="UserModel.lastname_kana" class="form-control" placeholder="姓かな">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">名</span>
-          <input type="text" v-model="UserModel.firstname" class="form-control" placeholder="名">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">名かな</span>
-          <input type="text" v-model="UserModel.firstname_kana" class="form-control" placeholder="名かな">
-        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text">姓</span>
+              <input type="text" v-model="UserModel.lastname" class="form-control" placeholder="姓">
+            </div>
+          </div>  <!--col end -->
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text">名</span>
+              <input type="text" v-model="UserModel.firstname" class="form-control" placeholder="名">
+            </div>
+          </div>  <!--col end -->
+        </div>  <!--row end -->
+
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text">姓かな</span>
+              <input type="text" v-model="UserModel.lastname_kana" class="form-control" placeholder="姓かな">
+            </div>
+          </div>  <!--col end -->
+          <div class="col">
+            <div class="input-group mb-3">
+              <span class="input-group-text">名かな</span>
+              <input type="text" v-model="UserModel.firstname_kana" class="form-control" placeholder="名かな">
+            </div>
+          </div>  <!--col end -->
+        </div>  <!--row end -->
+
         <div class="input-group mb-3"><!--性別-->
           <div class="form-check">
             <input class="form-check-input" type="radio" v-model="UserModel.gender" value="1" name="genderRadio" id="genderRadioMale">
@@ -32,25 +46,197 @@
               男性
             </label>
           </div>
-          <div class="form-check">
+          <div class="form-check mx-2">
             <input class="form-check-input" type="radio" v-model="UserModel.gender" value="2" name="genderRadio" id="genderRadioFemale">
             <label class="form-check-label" for="genderRadioFemale">
               女性
             </label>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">生年月日（年）</span>
-          <input type="text" v-model="UserModel.birth_year" class="form-control" placeholder="生年月日（年）">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">生年月日（月）</span>
-          <input type="text" v-model="UserModel.birth_month" class="form-control" placeholder="生年月日（月）">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text">生年月日（日）</span>
-          <input type="text" v-model="UserModel.birth_day" class="form-control" placeholder="生年月日（日）">
-        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <span class="input-group-text">生年月日(年)</span>
+            <select v-model="UserModel.birth_year" class="form-select">
+              <option selected>生年月日(年)を選択してください</option>
+              <option value="2022">2022年 令和4年</option>
+              <option value="2021">2021年 令和3年</option>
+              <option value="2020">2020年 令和2年</option>
+              <option value="2019">2019年 令和1年</option>
+
+              <option value="2018">2018年 平成30年</option>
+              <option value="2017">2017年 平成29年</option>
+              <option value="2016">2016年 平成28年</option>
+              <option value="2015">2015年 平成27年</option>
+              <option value="2014">2014年 平成26年</option>
+              <option value="2013">2013年 平成25年</option>
+              <option value="2012">2012年 平成24年</option>
+              <option value="2011">2011年 平成23年</option>
+              <option value="2010">2010年 平成22年</option>
+              <option value="2009">2009年 平成21年</option>
+              <option value="2008">2008年 平成20年</option>
+              <option value="2007">2007年 平成19年</option>
+              <option value="2006">2006年 平成18年</option>
+              <option value="2005">2005年 平成17年</option>
+              <option value="2004">2004年 平成16年</option>
+              <option value="2003">2003年 平成15年</option>
+              <option value="2002">2002年 平成14年</option>
+              <option value="2001">2001年 平成13年</option>
+              <option value="2000">2000年 平成12年</option>
+              <option value="1999">1999年 平成11年</option>
+              <option value="1998">1998年 平成10年</option>
+              <option value="1997">1997年 平成9年</option>
+              <option value="1996">1996年 平成8年</option>
+              <option value="1995">1995年 平成7年</option>
+              <option value="1994">1994年 平成6年</option>
+              <option value="1993">1993年 平成5年</option>
+              <option value="1992">1992年 平成4年</option>
+              <option value="1991">1991年 平成3年</option>
+              <option value="1990">1990年 平成2年</option>
+              <option value="1989">1989年 平成1年</option>
+
+              <option value="1988">1988年 昭和63年</option>
+              <option value="1987">1987年 昭和62年</option>
+              <option value="1986">1986年 昭和61年</option>
+              <option value="1985">1985年 昭和60年</option>
+              <option value="1984">1984年 昭和59年</option>
+              <option value="1983">1983年 昭和58年</option>
+              <option value="1982">1982年 昭和57年</option>
+              <option value="1981">1981年 昭和56年</option>
+              <option value="1980">1980年 昭和55年</option>
+              <option value="1979">1979年 昭和54年</option>
+              <option value="1978">1978年 昭和53年</option>
+              <option value="1977">1977年 昭和52年</option>
+              <option value="1976">1976年 昭和51年</option>
+              <option value="1975">1975年 昭和50年</option>
+              <option value="1974">1974年 昭和49年</option>
+              <option value="1973">1973年 昭和48年</option>
+              <option value="1972">1972年 昭和47年</option>
+              <option value="1971">1971年 昭和46年</option>
+              <option value="1970">1970年 昭和45年</option>
+              <option value="1969">1969年 昭和44年</option>
+              <option value="1968">1968年 昭和43年</option>
+              <option value="1967">1967年 昭和42年</option>
+              <option value="1966">1966年 昭和41年</option>
+              <option value="1965">1965年 昭和40年</option>
+              <option value="1964">1964年 昭和39年</option>
+              <option value="1963">1963年 昭和38年</option>
+              <option value="1962">1962年 昭和37年</option>
+              <option value="1961">1961年 昭和36年</option>
+              <option value="1960">1960年 昭和35年</option>
+              <option value="1959">1959年 昭和34年</option>
+              <option value="1958">1958年 昭和33年</option>
+              <option value="1957">1957年 昭和32年</option>
+              <option value="1956">1956年 昭和31年</option>
+              <option value="1955">1955年 昭和30年</option>
+              <option value="1954">1954年 昭和29年</option>
+              <option value="1953">1953年 昭和28年</option>
+              <option value="1952">1952年 昭和27年</option>
+              <option value="1951">1951年 昭和26年</option>
+              <option value="1950">1950年 昭和25年</option>
+
+              <option value="1949">1949年 昭和25年</option>
+              <option value="1948">1948年 昭和24年</option>
+              <option value="1947">1947年 昭和23年</option>
+              <option value="1946">1946年 昭和22年</option>
+              <option value="1945">1945年 昭和21年</option>
+              <option value="1944">1944年 昭和20年</option>
+              <option value="1943">1943年 昭和19年</option>
+              <option value="1942">1942年 昭和18年</option>
+              <option value="1941">1941年 昭和17年</option>
+              <option value="1940">1940年 昭和16年</option>
+              <option value="1939">1939年 昭和15年</option>
+              <option value="1938">1938年 昭和14年</option>
+              <option value="1937">1937年 昭和13年</option>
+              <option value="1936">1936年 昭和12年</option>
+              <option value="1935">1935年 昭和11年</option>
+              <option value="1934">1934年 昭和10年</option>
+              <option value="1933">1933年 昭和9年</option>
+              <option value="1932">1932年 昭和8年</option>
+              <option value="1931">1931年 昭和7年</option>
+              <option value="1930">1930年 昭和6年</option>
+              <option value="1929">1929年 昭和5年</option>
+              <option value="1928">1928年 昭和4年</option>
+              <option value="1927">1927年 昭和3年</option>
+              <option value="1926">1926年 昭和2年</option>
+              <option value="1925">1925年 昭和1年</option>
+            </select>
+            <!--
+            <div class="input-group mb-3">
+              <span class="input-group-text">生年月日（年）</span>
+              <input type="text" v-model="UserModel.birth_year" class="form-control" placeholder="生年月日（年）">
+            </div>
+            -->
+          </div>  <!--col end -->
+          <div class="col">
+            <span class="input-group-text">生年月日（月）</span>
+            <select v-model="UserModel.birth_month" class="form-select">
+              <option selected>生年月日（月）を選択してください</option>
+              <option value="1">1月</option>
+              <option value="2">2月</option>
+              <option value="3">3月</option>
+              <option value="4">4月</option>
+              <option value="5">5月</option>
+              <option value="6">6月</option>
+              <option value="7">7月</option>
+              <option value="8">8月</option>
+              <option value="9">9月</option>
+              <option value="10">10月</option>
+              <option value="11">11月</option>
+              <option value="12">12月</option>
+            </select>
+            <!--
+            <div class="input-group mb-3">
+              <span class="input-group-text">生年月日（月）</span>
+              <input type="text" v-model="UserModel.birth_month" class="form-control" placeholder="生年月日（月）">
+            </div>
+            -->
+          </div>  <!--col end -->
+          <div class="col">
+            <span class="input-group-text">生年月日（日）</span>
+            <select v-model="UserModel.birth_day" class="form-select">
+              <option selected>生年月日（日）を選択してください</option>
+              <option value="1">1日</option>
+              <option value="2">2日</option>
+              <option value="3">3日</option>
+              <option value="4">4日</option>
+              <option value="5">5日</option>
+              <option value="6">6日</option>
+              <option value="7">7日</option>
+              <option value="8">8日</option>
+              <option value="9">9日</option>
+              <option value="10">10日</option>
+              <option value="11">11日</option>
+              <option value="12">12日</option>
+              <option value="13">13日</option>
+              <option value="14">14日</option>
+              <option value="15">15日</option>
+              <option value="16">16日</option>
+              <option value="17">17日</option>
+              <option value="18">18日</option>
+              <option value="19">19日</option>
+              <option value="20">20日</option>
+              <option value="21">21日</option>
+              <option value="22">22日</option>
+              <option value="23">23日</option>
+              <option value="24">24日</option>
+              <option value="25">25日</option>
+              <option value="26">26日</option>
+              <option value="27">27日</option>
+              <option value="28">28日</option>
+              <option value="29">29日</option>
+              <option value="30">30日</option>
+              <option value="31">31日</option>
+            </select>
+            <!--
+            <div class="input-group mb-3">
+              <span class="input-group-text">生年月日（日）</span>
+              <input type="text" v-model="UserModel.birth_day" class="form-control" placeholder="生年月日（日）">
+            </div>
+            -->
+          </div>  <!--col end -->
+        </div>  <!--row end -->
+
         <div class="input-group mb-3">
           <span class="input-group-text">郵便番号</span>
           <input type="text" v-model="UserModel.zipcode" class="form-control" placeholder="郵便番号">
@@ -81,11 +267,11 @@
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">通勤時間</span>
-          <input type="text" v-model="UserModel.commuting_time" class="form-control" placeholder="">
+          <input type="text" v-model="UserModel.commuting_time" class="form-control" placeholder="分、時間">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">扶養家族（配偶者を除く）</span>
-          <input type="text" v-model="UserModel.dependents" class="form-control" placeholder="">
+          <input type="text" v-model="UserModel.dependents" class="form-control" placeholder="人">
         </div>
         <div class="input-group mb-3">
           <div class="form-check form-switch">

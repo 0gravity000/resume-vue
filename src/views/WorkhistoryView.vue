@@ -12,17 +12,17 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">年</th>
-            <th scope="col">月</th>
-            <th scope="col">学歴</th>
-            <th scope="col">#</th>
-            <th scope="col">#</th>
+            <th scope="col" style="width: 20%">年</th>
+            <th scope="col" style="width: 10%">月</th>
+            <th scope="col" style="width: 50%">職歴</th>
+            <th scope="col" style="width: 10%">編集</th>
+            <th scope="col" style="width: 10%">削除</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in WorkhistoryModel" :key="item.id">
-            <td>{{item.event_year}}</td>
-            <td>{{item.event_month}}</td>
+            <td>{{item.event_year}}年({{convertYearToJapaneseYear(item.event_year)}})</td>
+            <td>{{item.event_month}}月</td>
             <td>{{item.event}}</td>
             <td>
               <button @click="onClickEditButton(item)">編集</button>
@@ -78,6 +78,20 @@ export default {
     },
   },
   methods: {
+    convertYearToJapaneseYear(year) {
+      //console.log(year)
+      if (year >= 2019) {
+        //console.log("令和？")
+        return "令和" + (year - 2018) + "年"
+      } else if (year >= 1989 && year < 2019) {
+        //console.log("平成？")
+        //console.log("平成" + (year - 1988) + "年")
+        return "平成" + (year - 1988) + "年"
+      } else {
+        //console.log("昭和？")
+        return "昭和" + (year - 1924) + "年"
+      }
+    },
     onClickEditButton (item) {
       console.log("WorkhistoryView：")
       console.log("item:" + JSON.stringify(item))
