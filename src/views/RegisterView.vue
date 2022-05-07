@@ -5,6 +5,11 @@
       <div class="my-3">
         <router-link to="/">戻る</router-link>
       </div>
+      <div  class="row">
+        <div class="col-12 mb-3" :class="{'valid-msg': isErrorMsg}">
+          <strong>{{validationMsg}}</strong>
+        </div>  <!-- col end -->
+      </div>  <!-- row end -->
       <form>
         <div  class="row">
           <div class="col-12 mb-3">
@@ -34,6 +39,8 @@ export default {
   },
   data () {
     return {
+      validationMsg: "",
+      isErrorMsg: false,
       /*
       AccountModel: {
         is_authenticated: "",
@@ -101,7 +108,12 @@ export default {
         self.$emit('update-auth-notification', res.data) //★
         //ユーザー認証に成功したらホーム画面に遷移
         if (res.data.result == "OK") {
+          self.validationMsg = res.data.message //バリデーションメッセージをクリア
+          self.isErrorMsg = false
           self.$router.push({name: "home"})
+        } else {  //バリデーションエラー時
+          self.validationMsg = res.data.message //バリデーションメッセージを代入
+          self.isErrorMsg = true
         }
       })
       .catch(function (err) {
@@ -117,6 +129,9 @@ export default {
 <style scoped>
 .register {
   text-align: start;
+}
+.valid-msg {
+  background-color: pink;
 }
 
 </style>

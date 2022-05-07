@@ -3,6 +3,7 @@
     <NavbarUser
       @update-auth-notification="updateAuthInfo"
     />
+    <h2>メニューを選択してください</h2>
     <router-view
       :account="account"
       @update-auth-notification="updateAuthInfo"
@@ -93,3 +94,11 @@ export default {
   }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h2 {
+  margin: 1rem;
+}
+
+</style>
