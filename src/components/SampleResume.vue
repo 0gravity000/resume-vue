@@ -13,10 +13,10 @@
 </div>
 <div class="container-fluid">
     <div class="row">
+        <h3>履歴書サンプル</h3>
         <div class="col">
             <div class="columns">
-                <div class="column is-6">履歴書</div>
-                <div class="column is-6 text-end">令和３年 ８月１８日現在</div>
+                <div class="column is-6 text-end">{{japaneseYearToday()}}現在</div>
             </div>
         </div>  <!-- col -->
         <div class="col">
@@ -336,12 +336,14 @@
 <script>
 
 export default {
+  mounted() {
+    this.japaneseYearToday()
+  },
   methods: {
-    /*
-    goToTop() {
-        this.$router.push('/')
+    japaneseYearToday() {
+      let today = new Date()
+      return "令和"+(today.getFullYear()-2018)+"年"+(today.getMonth()+1)+"月"+(today.getDate())+"日"
     }
-    */
   }
 }
 
