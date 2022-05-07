@@ -109,7 +109,9 @@ export default {
   methods: {
     convertYearToJapaneseYear(year) {
       //console.log(year)
-      if (year >= 2019) {
+      if (year === null) {
+        return "-"
+      } else if (year >= 2019) {
         //console.log("令和？")
         return "令和" + (year - 2018) + "年"
       } else if (year >= 1989 && year < 2019) {
