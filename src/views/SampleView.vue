@@ -1,18 +1,18 @@
 <template>
   <div class="sample">
-    <SampleResume />
+    <SampleResumeNonResponsive />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import SampleResume from '@/components/SampleResume.vue'
+import SampleResumeNonResponsive from '@/components/SampleResumeNonResponsive.vue'
 //const axios = require('axios').default
 
 export default {
   name: 'SampleView',
   components: {
-    SampleResume
+    SampleResumeNonResponsive
   },
   props: {
     account: {
