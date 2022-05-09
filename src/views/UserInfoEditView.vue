@@ -238,8 +238,8 @@
         </div>  <!--row end -->
 
         <div class="input-group mb-3">
-          <span class="input-group-text">郵便番号</span>
-          <input type="text" v-model="UserModel.zipcode" class="form-control" placeholder="郵便番号">
+          <span class="input-group-text">住所郵便番号</span>
+          <input type="text" v-model="UserModel.address_zipcode" class="form-control" placeholder="住所郵便番号">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">住所</span>
@@ -250,12 +250,32 @@
           <input type="text" v-model="UserModel.address_kana" class="form-control" placeholder="住所かな">
         </div>
         <div class="input-group mb-3">
+          <span class="input-group-text">住所電話番号</span>
+          <input type="text" v-model="UserModel.address_phone" class="form-control" placeholder="住所電話番号">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">住所メールアドレス</span>
+          <input type="text" v-model="UserModel.address_email" class="form-control" placeholder="住所メールアドレス">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">連絡先郵便番号</span>
+          <input type="text" v-model="UserModel.contact_zipcode" class="form-control" placeholder="連絡先郵便番号">
+        </div>
+        <div class="input-group mb-3">
           <span class="input-group-text">連絡先</span>
           <input type="text" v-model="UserModel.contact" class="form-control" placeholder="連絡先">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">連絡先かな</span>
           <input type="text" v-model="UserModel.contact_kana" class="form-control" placeholder="連絡先かな">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">連絡先電話番号</span>
+          <input type="text" v-model="UserModel.contact_phone" class="form-control" placeholder="連絡先電話番号">
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text">連絡先メールアドレス</span>
+          <input type="text" v-model="UserModel.contact_email" class="form-control" placeholder="連絡先メールアドレス">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text">志望の動機、自己PR、趣味、特技など</span>
@@ -324,11 +344,16 @@ export default {
         birth_year: "",
         birth_month: "",
         birth_day: "",
-        zipcode: "",
+        address_zipcode: "",
         address: "",
         address_kana: "",
+        address_phone: "",
+        address_email: "",
+        contact_zipcode: "",
         contact: "",
         contact_kana: "",
+        contact_phone: "",
+        contact_email: "",
         self_pr: "",
         personal_request: "",
         commuting_time: "",
@@ -439,11 +464,16 @@ export default {
         birth_year: self.UserModel.birth_year,
         birth_month: self.UserModel.birth_month,
         birth_day: self.UserModel.birth_day,
-        zipcode: self.UserModel.zipcode,
+        address_zipcode: self.UserModel.address_zipcode,
         address: self.UserModel.address,
         address_kana: self.UserModel.address_kana,
+        address_phone: self.UserModel.address_phone,
+        address_email: self.UserModel.address_email,
+        contact_zipcode: self.UserModel.contact_zipcode,
         contact: self.UserModel.contact,
         contact_kana: self.UserModel.contact_kana,
+        contact_phone: self.UserModel.contact_phone,
+        contact_email: self.UserModel.contact_email,
         self_pr: self.UserModel.self_pr,
         personal_request: self.UserModel.personal_request,
         commuting_time: self.UserModel.commuting_time,

@@ -3,7 +3,7 @@
     <NavbarUser
       @update-auth-notification="updateAuthInfo"
     />
-    <h2>メニューを選択してください</h2>
+    <PreviewResume />
     <router-view
       :account="account"
       @update-auth-notification="updateAuthInfo"
@@ -14,12 +14,14 @@
 <script>
 // @ is an alias to /src
 import NavbarUser from '@/components/NavbarUser.vue'
+import PreviewResume from '@/components/PreviewResume.vue'
 const axios = require('axios').default
 
 export default {
   name: 'HomeView',
   components: {
     NavbarUser,
+    PreviewResume
   },
   props: {
     account: {

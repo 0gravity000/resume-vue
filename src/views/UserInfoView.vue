@@ -41,8 +41,8 @@
         <li class="list-group-item col-4">{{UserModel.birth_day}}日</li>
       </ul>
       <ul class="list-group list-group-horizontal">
-        <li class="list-group-item list-group-item-primary col-2">郵便番号</li>
-        <li class="list-group-item col-4">{{UserModel.zipcode}}</li>
+        <li class="list-group-item list-group-item-primary col-2">住所郵便番号</li>
+        <li class="list-group-item col-4">{{UserModel.address_zipcode}}</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">住所</li>
@@ -53,12 +53,32 @@
         <li class="list-group-item col-4">{{UserModel.address_kana}}</li>
       </ul>
       <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary col-2">住所電話番号</li>
+        <li class="list-group-item col-4">{{UserModel.address_phone}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary col-2">住所メールアドレス</li>
+        <li class="list-group-item col-4">{{UserModel.address_email}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary col-2">連絡先郵便番号</li>
+        <li class="list-group-item col-4">{{UserModel.contact_zipcode}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">連絡先</li>
         <li class="list-group-item col-4">{{UserModel.contact}}</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">連絡先かな</li>
         <li class="list-group-item col-4">{{UserModel.contact_kana}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary col-2">連絡先電話番号</li>
+        <li class="list-group-item col-4">{{UserModel.contact_phone}}</li>
+      </ul>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item list-group-item-primary col-2">連絡先メールアドレス</li>
+        <li class="list-group-item col-4">{{UserModel.contact_email}}</li>
       </ul>
       <ul class="list-group list-group-horizontal">
         <li class="list-group-item list-group-item-primary col-2">志望の動機、自己PR、趣味、特技など</li>
